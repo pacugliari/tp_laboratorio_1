@@ -23,6 +23,10 @@ int mostrarMenu(void){
 		scanf("%d",&respuesta);
 		fflush(stdin);
 		system("cls");
+
+		if(respuesta <0 || respuesta > 6){
+			mostrarMensajeErrorMenu();
+		}
 	}while(respuesta < 1 || respuesta > 6);
 
 
@@ -119,9 +123,11 @@ void calcularPrecios(char opcionesVuelos,float* precioLatam,float* precioAerolin
 }
 
 void mostrarMensajeFinPrograma(void){
+	system("cls");
 	printf("Gracias por usar el programa \n");
+	system("pause");
 }
 
 void mostrarMensajeErrorMenu(void){
-	printf("Ingreso una opcion invalida, vuelva a ingresar \n");
+	printf("Ingreso una opcion invalida, vuelva a ingresar \n\n");
 }

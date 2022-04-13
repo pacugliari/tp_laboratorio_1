@@ -25,33 +25,29 @@ int main()
 	do{
 		respuestaMenu = mostrarMenu();
 		switch(respuestaMenu){
-		case 1:
-			kilometrosIngresados = obtenerKilometros();
-		break;
-		case 2:
-			opcionVuelos=mostrarOpcionesVuelos();
-			calcularPrecios (opcionVuelos,&precioLatam,&precioAerolineas);
-		break;
-		case 3:
-			esCorrectoCalculo = calcularCostos(precioAerolineas,precioLatam,kilometrosIngresados,preciosCalculados);
-		break;
-		case 4:
-			mostrarResultados(preciosCalculados,kilometrosIngresados,precioAerolineas,precioLatam,esCorrectoCalculo);
-			reiniciarValores(&precioAerolineas,&precioLatam,&kilometrosIngresados,&esCorrectoCalculo);
-		break;
-		case 5:
-			cargaForzada(&precioAerolineas,&precioLatam,&kilometrosIngresados);
-			esCorrectoCalculo = calcularCostos(precioAerolineas,precioLatam,kilometrosIngresados,preciosCalculados);
-			mostrarResultados(preciosCalculados,kilometrosIngresados,precioAerolineas,precioLatam,esCorrectoCalculo);
-			reiniciarValores(&precioAerolineas,&precioLatam,&kilometrosIngresados,&esCorrectoCalculo);
-		break;
-		case 6:
-			mostrarMensajeFinPrograma();
-		break;
-		default:
-			mostrarMensajeErrorMenu();
-		break;
-		system("cls");
+			case 1:
+				kilometrosIngresados = obtenerKilometros();
+			break;
+			case 2:
+				opcionVuelos=mostrarOpcionesVuelos();
+				calcularPrecios (opcionVuelos,&precioLatam,&precioAerolineas);
+			break;
+			case 3:
+				esCorrectoCalculo = calcularCostos(precioAerolineas,precioLatam,kilometrosIngresados,preciosCalculados);
+			break;
+			case 4:
+				mostrarResultados(preciosCalculados,kilometrosIngresados,precioAerolineas,precioLatam,esCorrectoCalculo);
+				reiniciarValores(&precioAerolineas,&precioLatam,&kilometrosIngresados,&esCorrectoCalculo);
+			break;
+			case 5:
+				cargaForzada(&precioAerolineas,&precioLatam,&kilometrosIngresados);
+				esCorrectoCalculo = calcularCostos(precioAerolineas,precioLatam,kilometrosIngresados,preciosCalculados);
+				mostrarResultados(preciosCalculados,kilometrosIngresados,precioAerolineas,precioLatam,esCorrectoCalculo);
+				reiniciarValores(&precioAerolineas,&precioLatam,&kilometrosIngresados,&esCorrectoCalculo);
+			break;
+			case 6:
+				mostrarMensajeFinPrograma();
+			break;
 		}
 	}while(respuestaMenu != 6);
 

@@ -14,7 +14,7 @@
 #define PRECIO_AERO_FORZADO 162965
 
 float calcularBitCoin(float unPrecio){
-	return unPrecio/4606954.55;
+	return unPrecio/BITCOIN;
 }
 
 float calcularUnitario(float unPrecio,float kilometros){
