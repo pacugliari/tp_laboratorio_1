@@ -8,11 +8,6 @@
 #ifndef TP__2__HEADERS_ARRAYPASSENGER_H_
 #define TP__2__HEADERS_ARRAYPASSENGER_H_
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define CANT_PASAJEROS 2000
 
 struct
 {
@@ -26,7 +21,9 @@ struct
 	int isEmpty;
 }typedef Passenger;
 
-void saludar();
+
+#endif /* TP__2__HEADERS_ARRAYPASSENGER_H_ */
+
 int posicionVacia(Passenger* list,int len);
 
 /** \brief To indicate that all position in the array are empty,
@@ -128,5 +125,3 @@ int printPassengerActive(Passenger* list, int length);
 
 
 int calculatePricesPassengers(Passenger* list, int len,float* resultados);
-
-#endif /* TP__2__HEADERS_ARRAYPASSENGER_H_ */

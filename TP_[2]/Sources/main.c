@@ -6,6 +6,7 @@
  */
 
 #include "../Headers/interface.h"
+#include "stdio.h"
 
 
 int main(){
