@@ -8,6 +8,13 @@
 #ifndef TP__2__HEADERS_ARRAYPASSENGER_H_
 #define TP__2__HEADERS_ARRAYPASSENGER_H_
 
+#define ASC 1
+#define DESC 0
+#define ERROR -1
+#define FALSE 0
+#define TRUE 1
+#define TODO_OK 0
+
 
 struct
 {
@@ -117,11 +124,41 @@ int sortPassengersByCode(Passenger* list, int len, int order);
 MODIFICAR: Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido
 o Precio o Tipo de pasajero o Código de vuelo
  * */
+/// @fn int modifyPassenger(Passenger*, int, int, char[], char[], float, int, char[])
+/// @brief
+///
+/// @param list
+/// @param len
+/// @param id
+/// @param name
+/// @param lastName
+/// @param price
+/// @param typePassenger
+/// @param flycode
+/// @return
 int modifyPassenger(Passenger* list, int len, int id, char name[],char
 		lastName[],float price,int typePassenger, char flycode[]);
 
-
+/// @fn int printPassengerActive(Passenger*, int)
+/// @brief
+///
+/// @param list
+/// @param length
+/// @return
 int printPassengerActive(Passenger* list, int length);
 
-
+/// @fn int calculatePricesPassengers(Passenger*, int, float*)
+/// @brief
+///
+/// @param list
+/// @param len
+/// @param resultados
+/// @return
 int calculatePricesPassengers(Passenger* list, int len,float* resultados);
+
+
+/// @fn void printPassengerData(Passenger)
+/// @brief
+///
+/// @param p
+void printPassengerData (Passenger p);

@@ -25,6 +25,27 @@ int pedirDatosMenu(){
 
 }
 
+char pedirConfirmacion (Passenger pasajero,int tipo){
+	char respuesta = 'n';
+	if(!pasajero.isEmpty){
+		printf("SI \n");
+		if(tipo==MODIFICAR){
+			printf("Desea modificar el siguiente pasajero ? s-n \n");
+		}else
+			printf("Desea borrar el siguiente pasajero ? s-n \n");
+
+		printf("ID\t\tNombre\t\tApellido\t\t    Precio\t\tTipo de Pasajero\t\tCodigo de vuelo\t\tEstado de vuelo\n");
+		printf("-------------------------------------------------------------------------------------------------------------------------------"
+				"------------------------\n");
+		printPassengerData(pasajero);
+		fflush(stdin);
+		scanf("%c",&respuesta);
+		fflush(stdin);
+	}
+	return respuesta;
+
+}
+
 void pedirDatosPasajero(Passenger* pasajero,int tipo){
 	char cadenaAux [100];//51
 	float precio;
@@ -71,12 +92,14 @@ void pedirDatosPasajero(Passenger* pasajero,int tipo){
 	}
 	strcpy(pasajero->flycode,cadenaAux);
 
-	if(tipo){
+	if(tipo==ALTA){
 		printf("Ingrese el estado del vuelo \n");
 		scanf("%d",&estadoVuelo);
+		fflush(stdin);
 		while(estadoVuelo != 1 && estadoVuelo != 0){
 			printf("Ingrese el estado del vuelo, debe ser 1(ACTIVO) o 0 (INACTIVO) \n");
 			scanf("%d",&estadoVuelo);
+			fflush(stdin);
 		}
 		pasajero->statusFlight = estadoVuelo;
 	}

@@ -5,82 +5,49 @@
 #include "../Headers/ArrayPassenger.h"
 #include "../Headers/pedirDatos.h"
 
-#define CANT_PASAJEROS 2000
-
-void ejecutarMenu(Passenger* ,int* );
+void ejecutarMenu(Passenger* );
 void logicaSubMenu(Passenger* );
 void mostrarPrecios(float* );
+void hardcodeoDatos(Passenger* ,int* ,int* ,int );
+void alta(Passenger* ,int* cantdadPasajeros,int* );
+void modificar(Passenger*);
+void baja(Passenger*,int* );
 
 void ejecutarPrograma(){
 
 	Passenger arrayPassengers [CANT_PASAJEROS] ={};
-	int cantidadPasajerosCargados = 0;
 
-	if(!initPassengers(arrayPassengers,CANT_PASAJEROS)){
-		/*
-			//HARDCODEO DATOS DE PRUEBA
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Pablo","Cugliari",100,1,1,"PA1006");
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Beto","Cugliari",200,2,0,"PA1006");
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Mirta","Mena",300,3,1,"PA1004");
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Antonio","Mena",400,4,0,"PA1003");
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Donna","Benfenati",500,5,1,"PA1002");
-			addPassenger(arrayPassengers,CANT_PASAJEROS,posicionVacia(arrayPassengers,CANT_PASAJEROS),"Gian","Benfenati",600,6,0,"PA1001");
-			cantidadPasajerosCargados = 6;
-			//FIN HARDCODEO DATOS*/
+	if(TODO_OK == initPassengers(arrayPassengers,CANT_PASAJEROS)){
 
-			ejecutarMenu(arrayPassengers,&cantidadPasajerosCargados);
+			ejecutarMenu(arrayPassengers);
 
 	}else{
 		printf("Error al iniciar el programa \n");
 	}
 }
 
-void ejecutarMenu(Passenger* arrayPassengers,int* cantidadPasajerosCargados){
+
+void ejecutarMenu(Passenger* arrayPassengers){
 	int respuestaMenu;
-	int idBusqueda;
-	int unaPosicionVacia;
-	Passenger pasajero;
+	int id = -1;
+	int cantidadPasajerosCargados = 0;
+
+	//hardcodeoDatos(arrayPassengers,&id,&cantidadPasajerosCargados,6);
 
 	do{
 		respuestaMenu = pedirDatosMenu();
-		if(respuestaMenu != 1 && respuestaMenu!= 5 && !*cantidadPasajerosCargados){
+		if(respuestaMenu != 1 && respuestaMenu!= 5 && !cantidadPasajerosCargados){
 			printf("Debe dar de ALTA por lo menos 1 pasajero para utilizar esta opcion \n");
 		}else{
 			switch(respuestaMenu){
 				case 1:
-					//ALTA
-					pedirDatosPasajero(&pasajero,ALTA);
-					unaPosicionVacia = posicionVacia(arrayPassengers,CANT_PASAJEROS);
-
-					if(!addPassenger(arrayPassengers,CANT_PASAJEROS,unaPosicionVacia,pasajero.name,pasajero.lastName,
-							pasajero.price,pasajero.typePassenger,pasajero.statusFlight,pasajero.flycode)){
-
-						printf("Pasajero dado de ALTA exitosamente \n");
-						(*cantidadPasajerosCargados)++;
-					}else
-						printf("Error en la ALTA del pasajero \n");
-
+					alta(arrayPassengers,&cantidadPasajerosCargados,&id);
 				break;
 				case 2:
-					//MODIFICAR
-					idBusqueda = pedirId();
-					pedirDatosPasajero(&pasajero,MODIFICAR);
-
-					if(!modifyPassenger(arrayPassengers,CANT_PASAJEROS,idBusqueda,pasajero.name,pasajero.lastName,pasajero.price,
-							pasajero.typePassenger,pasajero.flycode)){
-						printf("Pasajero MODIFICADO exitosamente \n");
-					}else
-						printf("Error en la MODIFICACION del pasajero \n");
-
+					modificar(arrayPassengers);
 				break;
 				case 3:
-					//BAJA
-					idBusqueda = pedirId();
-					if(!removePassenger(arrayPassengers,CANT_PASAJEROS,idBusqueda)){
-							printf("Pasajero dado de BAJA de manera exitosa \n");
-							(*cantidadPasajerosCargados)--;
-					}else
-						printf("Error en la BAJA del pasajero \n");
+					baja(arrayPassengers,&cantidadPasajerosCargados);
 				break;
 				case 4:
 					logicaSubMenu(arrayPassengers);
@@ -91,6 +58,70 @@ void ejecutarMenu(Passenger* arrayPassengers,int* cantidadPasajerosCargados){
 			}
 		}
 	}while(respuestaMenu != 5);
+}
+
+void hardcodeoDatos(Passenger* list,int* id,int* cantidad,int cantidadDatos){
+	int estado = 0;
+	char str [100];
+	for(int i=0; i<cantidadDatos;i++){
+		if(ERROR != addPassenger(list,CANT_PASAJEROS,*id,itoa(i,str,10),itoa(i,str,10),i,i,estado,itoa(i,str,10))){
+			(*id)++;
+			(*cantidad)++;
+			estado = !estado;
+		}
+	}
+}
+
+void alta(Passenger* list,int* cantidadPasajeros,int* id){
+	//ALTA
+	Passenger pasajero;
+	if(*cantidadPasajeros == CANT_PASAJEROS){
+		printf("Limite de pasajeros alcanzado (MAX: %d) \n",CANT_PASAJEROS);
+	}else{
+		pedirDatosPasajero(&pasajero,ALTA);
+		if(!addPassenger(list,CANT_PASAJEROS,*id,pasajero.name,pasajero.lastName,
+				pasajero.price,pasajero.typePassenger,pasajero.statusFlight,pasajero.flycode)){
+
+			printf("Pasajero dado de ALTA exitosamente \n");
+			(*cantidadPasajeros)++;
+			(*id)++;
+		}else
+			printf("Error en la ALTA del pasajero \n");
+	}
+
+}
+
+void modificar(Passenger* list){
+	//MODIFICAR
+	int idBusqueda = pedirId();
+	Passenger pasajero;
+	int posicion = findPassengerById(list,CANT_PASAJEROS,idBusqueda);
+	if(ERROR == posicion){
+		printf("Error en la ID ingresada \n");
+	}else if ('s'== pedirConfirmacion(list[posicion],MODIFICAR)){
+		pedirDatosPasajero(&pasajero,MODIFICAR);
+		if(!modifyPassenger(list,CANT_PASAJEROS,idBusqueda,pasajero.name,pasajero.lastName,pasajero.price,
+				pasajero.typePassenger,pasajero.flycode)){
+			printf("Pasajero MODIFICADO exitosamente \n");
+		}else
+			printf("Error en la MODIFICACION del pasajero \n");
+	}
+}
+
+
+void baja (Passenger* list,int* cantidadPasajeros){
+	//BAJA
+	int idBusqueda = pedirId();
+	int posicion = findPassengerById(list,CANT_PASAJEROS,idBusqueda);
+	if(ERROR == posicion){
+		printf("Error en la ID ingresada \n");
+	}else if ('s'== pedirConfirmacion(list[posicion],BAJA)){
+		if(!removePassenger(list,CANT_PASAJEROS,idBusqueda)){
+				printf("Pasajero dado de BAJA de manera exitosa \n");
+				(*cantidadPasajeros)--;
+		}else
+			printf("Error en la BAJA del pasajero \n");
+	}
 }
 
 void logicaSubMenu(Passenger* list){
@@ -109,7 +140,7 @@ void logicaSubMenu(Passenger* list){
 			printPassenger(arrayPassengersAux,CANT_PASAJEROS);
 		break;
 		case 2:
-			if(calculatePricesPassengers(arrayPassengersAux,CANT_PASAJEROS,preciosCalculados)){
+			if(ERROR != calculatePricesPassengers(arrayPassengersAux,CANT_PASAJEROS,preciosCalculados)){
 				mostrarPrecios(preciosCalculados);
 			}
 		break;
@@ -122,9 +153,12 @@ void logicaSubMenu(Passenger* list){
 }
 
 void mostrarPrecios(float* resultados){
-	printf("Total de los pasajes: %.2f \n",resultados[0]);
-	printf("Promedio de los pasajes: %.2f \n",resultados[1]);
-	printf("Cantidad de pasajeros que superan el precio promedio: %d \n",(int)resultados[2]);
+	if(resultados){
+		printf("Total de los pasajes: %.2f \n",resultados[0]);
+		printf("Promedio de los pasajes: %.2f \n",resultados[1]);
+		printf("Cantidad de pasajeros que superan el precio promedio: %d \n",(int)resultados[2]);
+	}else
+		printf("Error al mostrar los precios \n");
 }
 
 

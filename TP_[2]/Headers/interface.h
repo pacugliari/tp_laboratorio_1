@@ -8,11 +8,11 @@
 #ifndef TP__2__HEADERS_INTERFACE_H_
 #define TP__2__HEADERS_INTERFACE_H_
 
-#define ASC 1
-#define DESC 0
-#define ALTA 1
-#define MODIFICAR 0
+#define CANT_PASAJEROS 2000
 
 #endif /* TP__2__HEADERS_INTERFACE_H_ */
 
+/// @fn void ejecutarPrograma()
+/// @brief
+///
 void ejecutarPrograma();
