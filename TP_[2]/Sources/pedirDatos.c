@@ -3,16 +3,30 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 
 int pedirDatosMenu(){
 	int respuesta;
-
+/*
+Trabajo Práctico número 2
+Programación I – Laboratorio I.
+Tecnicatura Superior en Programación.
+UTN-FRA
+ * */
 	do{
-		printf("1) ALTA \n");
-		printf("2) MODIFICAR \n");
-		printf("3) BAJA \n");
-		printf("4) INFORMAR \n");
-		printf("5) SALIR \n");
+		printf("\t\t\t\t\t\t***Trabajo Practico numero 2***\n");
+		printf("\t\t\t\t\t\t  Programacion I- Laboratorio I\n");
+		printf("\t\t\t\t\t  Tecnicatura Superior en Programacion UTN-FRA \n");
+		printf("Alumno: Pablo Cugliari | Division: 1A \n");
+		printf("-------------------------------------------------------------------------------------------------------------------------------"
+				"------------------------\n");
+		printf("1) Alta \n");
+		printf("2) Modificar \n");
+		printf("3) Baja \n");
+		printf("4) Informar \n");
+		printf("5) Salir \n");
+		printf("-------------------------------------------------------------------------------------------------------------------------------"
+				"------------------------\n");
 		scanf("%d",&respuesta);
 		fflush(stdin);
 
@@ -28,18 +42,20 @@ int pedirDatosMenu(){
 char pedirConfirmacion (Passenger pasajero,int tipo){
 	char respuesta = 'n';
 	if(!pasajero.isEmpty){
-		printf("SI \n");
 		if(tipo==MODIFICAR){
-			printf("Desea modificar el siguiente pasajero ? s-n \n");
+			printf("Desea modificar el siguiente pasajero ? s-n \n\n");
 		}else
-			printf("Desea borrar el siguiente pasajero ? s-n \n");
+			printf("Desea borrar el siguiente pasajero ? s-n \n\n");
 
 		printf("ID\t\tNombre\t\tApellido\t\t    Precio\t\tTipo de Pasajero\t\tCodigo de vuelo\t\tEstado de vuelo\n");
 		printf("-------------------------------------------------------------------------------------------------------------------------------"
 				"------------------------\n");
 		printPassengerData(pasajero);
+		printf("-------------------------------------------------------------------------------------------------------------------------------"
+				"------------------------\n");
 		fflush(stdin);
 		scanf("%c",&respuesta);
+		respuesta = tolower(respuesta);
 		fflush(stdin);
 	}
 	return respuesta;
@@ -128,9 +144,9 @@ int pedirId(){
 int pedirDatosSubMenu(){
 	int respuesta;
 	do{
-		printf("1) Listado de los pasajeros ordenados alfabéticamente por Apellido y Tipo de pasajero \n");
-		printf("2) Total y promedio de los precios de los pasajes, y cuántos pasajeros superan el precio promedio. \n");
-		printf("3) Listado de los pasajeros por Código de vuelo y estados de vuelos ‘ACTIVO’\n");
+		printf("1) Listado de los pasajeros ordenados alfabeticamente por Apellido y Tipo de pasajero \n");
+		printf("2) Total y promedio de los precios de los pasajes, y cuantos pasajeros superan el precio promedio. \n");
+		printf("3) Listado de los pasajeros por Codigo de vuelo y estados de vuelos 'ACTIVO'\n");
 		scanf("%d",&respuesta);
 		fflush(stdin);
 

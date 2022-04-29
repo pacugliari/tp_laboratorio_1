@@ -13,6 +13,6 @@
 #endif /* TP__2__HEADERS_INTERFACE_H_ */
 
 /// @fn void ejecutarPrograma()
-/// @brief
-///
+/// @brief inicializa el vector de Passengers validando que se realice de manera correcta y luego lanza la ejecucion del menu
+/// a traves de la funcion ejecutarMenu()
 void ejecutarPrograma();

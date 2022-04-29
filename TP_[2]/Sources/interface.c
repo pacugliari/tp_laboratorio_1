@@ -5,13 +5,64 @@
 #include "../Headers/ArrayPassenger.h"
 #include "../Headers/pedirDatos.h"
 
+///PROTOTIPOS DE FUNCIONES ENCAPSULADAS USADAS DENTRO DE LA FUNCION ejecutarMenu();
+
+/// @fn void ejecutarMenu(Passenger*)
+/// @brief contiene la logica y muestra las opciones del menu ALTA-MODIFICACION-BAJA-INFORMAR-SALIR
+///
+/// @param Passenger*, puntero al vector de Passengers
 void ejecutarMenu(Passenger* );
+
+/// @fn void logicaSubMenu(Passenger*)
+/// @brief contiene la logica y muestra las opciones del submenu de INFORMAR
+///
+/// @param Passenger*, recibe el vector de pasajeros para realizar una copia del mismo y no modificar el original
 void logicaSubMenu(Passenger* );
+
+/// @fn void mostrarPrecios(float*)
+/// @brief mustra los precios calculados de la opcion 3 del submenu de INFORMAR
+///
+/// @param float*, vector de flotantes donde se encuentran los 3 resultados, total de los pasajes, promedio y cantidad de pasajeros que superan
+/// dicho promedio
 void mostrarPrecios(float* );
+
+/// @fn void hardcodeoDatos(Passenger*, int*, int*, int)
+/// @brief funcion de prueba para inicializar el vector de pasajeros y facilitar la prueba del programa
+///
+/// @param Passenger*, puntero a vector de Passengers
+/// @param int* , puntero a entero de la id
+/// @param int*, puntero a entero con la cantidad de pasajeros cargados actualmente en el sistema
+/// @param int ,entero que es el tamanio maximo del vector de pasajeros
 void hardcodeoDatos(Passenger* ,int* ,int* ,int );
+
+/// @fn void alta(Passenger*, int*, int*)
+/// @brief funcion para dar el alta de un pasajero , validando que no se supere el maximo de pasajeros
+/// pide los datos al usuario utilizando la funcion pedirDatosPasajero(), da el alta en el vector de pasajeros utilizando
+/// la funcion addPassenger() y actualiza el valor de id y cantidad de pasajeros del sistema
+///
+/// @param Passenger*, puntero a vector de pasajeros
+/// @param cantdadPasajeros int*, puntero a entero que lleva la cuenta de la cantidad de pasajeros para poder actualizarlo
+/// @param int*, puntero a entero de la id para poder actualizar la misma
 void alta(Passenger* ,int* cantdadPasajeros,int* );
+
+/// @fn void modificar(Passenger*)
+/// @brief funcion que realiza la modificacion de un pasajero, validando la id ingresada por el usuario, muestra
+/// el pasajero correspondiente a la id ingresada por el usuario pidiendo una confirmacion, si la confirmacion es valida
+/// se piden los datos nuevos de modificacion y en caso correcto se realiza la modificacion del pasajero con ayuda de la funcion
+/// modifyPassenger()
+///
+/// @param Passenger*, puntero a vector de pasajeros
 void modificar(Passenger*);
+
+/// @fn void baja(Passenger*, int*)
+/// @brief funcion que realiza la baja de un pasajero validando la id ingresada por el usuario, antes de realizar la baja del sistema
+/// muestra el pasajero correspondiente a la id ingresada pidiendo confirmacion de borrado, si la confirmacion es valida se realiza la misma y
+/// se actualiza el contador de pasajeros del sistema
+///
+/// @param Passenger* , puntero a vector de pasajeros
+/// @param int*, puntero a entero de la cantidad de pasajeros del sistema
 void baja(Passenger*,int* );
+
 
 void ejecutarPrograma(){
 
@@ -32,10 +83,11 @@ void ejecutarMenu(Passenger* arrayPassengers){
 	int id = -1;
 	int cantidadPasajerosCargados = 0;
 
-	//hardcodeoDatos(arrayPassengers,&id,&cantidadPasajerosCargados,6);
+	hardcodeoDatos(arrayPassengers,&id,&cantidadPasajerosCargados,6);
 
 	do{
 		respuestaMenu = pedirDatosMenu();
+		system("cls");
 		if(respuestaMenu != 1 && respuestaMenu!= 5 && !cantidadPasajerosCargados){
 			printf("Debe dar de ALTA por lo menos 1 pasajero para utilizar esta opcion \n");
 		}else{
@@ -57,6 +109,8 @@ void ejecutarMenu(Passenger* arrayPassengers){
 				break;
 			}
 		}
+		system("pause");
+		system("cls");
 	}while(respuestaMenu != 5);
 }
 

@@ -31,6 +31,12 @@ struct
 
 #endif /* TP__2__HEADERS_ARRAYPASSENGER_H_ */
 
+/// @fn int posicionVacia(Passenger*, int)
+/// @brief busca en el vector de pasajeros la primer posicion vacia
+///
+/// @param list Passenger* , puntero a vector de pasajeros
+/// @param len int, tamanio del vector de pasajeros
+/// @return int, retorna -1 en caso de ERROR o en caso de encontrar la posicion vacia retorna el indice de la misma
 int posicionVacia(Passenger* list,int len);
 
 /** \brief To indicate that all position in the array are empty,
@@ -120,45 +126,45 @@ UTN FRA – Tecnicatura Superior en Programación. http://www.sistemas-utnfra.com.a
 int sortPassengersByCode(Passenger* list, int len, int order);
 
 
-/*
-MODIFICAR: Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido
-o Precio o Tipo de pasajero o Código de vuelo
- * */
+
 /// @fn int modifyPassenger(Passenger*, int, int, char[], char[], float, int, char[])
-/// @brief
+/// @brief Se ingresará el Número de Id, permitiendo modificar: o Nombre o Apellido
+///	o Precio o Tipo de pasajero o Código de vuelo
 ///
-/// @param list
-/// @param len
-/// @param id
-/// @param name
-/// @param lastName
-/// @param price
-/// @param typePassenger
-/// @param flycode
-/// @return
+/// @param list Passenger*, puntero a vector de pasajeros
+/// @param len int, entero con el tamanio del vector de pasajeros
+/// @param id int, id validada previamente del usuario a modificar
+/// @param name char*, puntero a cadena de caracteres con el nombre de usuario validado
+/// @param lastName char*, puntero a cadena de caracteres con el apellido de usuario validado
+/// @param price float, flotante con el valor del precio validado previamente
+/// @param typePassenger int, entero con el valor del tipo de pasajero validado
+/// @param flycode char*, puntero a cadena de caracteres con el codigo de vuelo  del usuario validado
+/// @return int, retorna un valor de -1 en caso de ERROR o un valor de 0 en caso de que se pudo hacer la modificacion
 int modifyPassenger(Passenger* list, int len, int id, char name[],char
 		lastName[],float price,int typePassenger, char flycode[]);
 
 /// @fn int printPassengerActive(Passenger*, int)
-/// @brief
+/// @brief muestra del vector de pasajeros aquellas posiciones que no estan vacias y el tipo de pasajero
+/// es ACTIVO = 1
 ///
-/// @param list
-/// @param length
-/// @return
+/// @param list Passenger*, puntero a vector de pasajeros
+/// @param length int, tamanio del vector
+/// @return int, retorna un valor de -1 en caso de ERROR o un valor de 0 en caso de que se pudo hacer la muestra de datos
 int printPassengerActive(Passenger* list, int length);
 
 /// @fn int calculatePricesPassengers(Passenger*, int, float*)
-/// @brief
+/// @brief calcula los precios del total , promedio y cantidad de pasajeros que superan dicho promedio
 ///
-/// @param list
-/// @param len
-/// @param resultados
-/// @return
+/// @param list Passenger* , puntero a vector de pasajeros
+/// @param len int, tamanio del vector de pasajeros
+/// @param resultados float*, puntero a vector de flotantes donde se almacenan los 3 resultados
+/// @return int, retorna un valor de -1 en caso de ERROR o un valor de 0 en caso de que se pudo hacer el calculo
 int calculatePricesPassengers(Passenger* list, int len,float* resultados);
 
 
 /// @fn void printPassengerData(Passenger)
-/// @brief
+/// @brief realiza una muestra de datos de un pasajero en particular, funcion usada en printPassengerActive() y
+///  printPassenger()
 ///
-/// @param p
+/// @param p Passenger, tipo de dato Pasenger , donde los campos contiene la informacion a mostrar
 void printPassengerData (Passenger p);
