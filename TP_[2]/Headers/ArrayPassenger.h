@@ -5,6 +5,8 @@
  *      Author: PACugliari
  */
 
+#include "../Headers/tipoPasajero.h"
+
 #ifndef TP__2__HEADERS_ARRAYPASSENGER_H_
 #define TP__2__HEADERS_ARRAYPASSENGER_H_
 
@@ -31,13 +33,6 @@ struct
 
 #endif /* TP__2__HEADERS_ARRAYPASSENGER_H_ */
 
-/// @fn int posicionVacia(Passenger*, int)
-/// @brief busca en el vector de pasajeros la primer posicion vacia
-///
-/// @param list Passenger* , puntero a vector de pasajeros
-/// @param len int, tamanio del vector de pasajeros
-/// @return int, retorna -1 en caso de ERROR o en caso de encontrar la posicion vacia retorna el indice de la misma
-int posicionVacia(Passenger* list,int len);
 
 /** \brief To indicate that all position in the array are empty,
 * this function put the flag (isEmpty) in TRUE in all
@@ -109,7 +104,7 @@ int sortPassengers(Passenger* list, int len, int order);
 * \return int
 *
 */
-int printPassenger(Passenger* list, int length);
+int printPassenger(Passenger* list, int length,eTipoPasajero tiposPasajeros[], int tamT);
 
 
 /** \brief Sort the elements in the array of passengers, the argument order
@@ -149,8 +144,10 @@ int modifyPassenger(Passenger* list, int len, int id, char name[],char
 ///
 /// @param list Passenger*, puntero a vector de pasajeros
 /// @param length int, tamanio del vector
+/// @param eTipoPasajero tiposPasajeros[], vector de tipos de pasajeros
+/// @param int tamT, tamanio del vector de tipos de pasajeros
 /// @return int, retorna un valor de -1 en caso de ERROR o un valor de 0 en caso de que se pudo hacer la muestra de datos
-int printPassengerActive(Passenger* list, int length);
+int printPassengerActive(Passenger* list, int length,eTipoPasajero tiposPasajeros[],int tamT);
 
 /// @fn int calculatePricesPassengers(Passenger*, int, float*)
 /// @brief calcula los precios del total , promedio y cantidad de pasajeros que superan dicho promedio
@@ -159,12 +156,43 @@ int printPassengerActive(Passenger* list, int length);
 /// @param len int, tamanio del vector de pasajeros
 /// @param resultados float*, puntero a vector de flotantes donde se almacenan los 3 resultados
 /// @return int, retorna un valor de -1 en caso de ERROR o un valor de 0 en caso de que se pudo hacer el calculo
-int calculatePricesPassengers(Passenger* list, int len,float* resultados);
+int calculatePricesPassengers(Passenger* list, int len);
 
 
 /// @fn void printPassengerData(Passenger)
 /// @brief realiza una muestra de datos de un pasajero en particular, funcion usada en printPassengerActive() y
 ///  printPassenger()
 ///
+///
 /// @param p Passenger, tipo de dato Pasenger , donde los campos contiene la informacion a mostrar
-void printPassengerData (Passenger p);
+/// @param eTipoPasajero tiposPasajeros[], vector de tipos de pasajeros
+/// @param int tamT, tamanio del vector de tipos de pasajeros
+void printPassengerData (Passenger p,eTipoPasajero tiposPasajeros[], int tamT);
+
+
+/// @fn int hardcodearPasajeros(Passenger[], int, int, int*)
+/// @brief carga en el vector de pasajeros informacion cargada previamente para probar el codigo
+///
+/// @param Passenger pasajeros[],vector de pasajeros
+/// @param int tamP, tamanio del vector de pasajeros
+/// @param int cantidad, cantidad de pasajeros con informacion falsa a cargar (MAX = 5)
+/// @param int* pId, puntero a entero que apunta a la variable que lleva el control de la id de pasajeros
+/// @return si los parametros son correctos retorna 1, si los parametros son incorrectos retorna 0
+int hardcodearPasajeros (Passenger pasajeros[],int tamP,int cantidad,int* pId);
+
+/// @fn int buscarPasajeroLibre(Passenger[], int, int*)
+/// @brief busca en el vector de pasajeros la primer posicion donde se encuentre uno libre, es decir con el campo isEmpty = 1
+///
+/// @param Passenger pasajeros [],vector de pasajeros
+/// @param int tamP, tamanio del vector de pasasjeros
+/// @param int* pIndice, puntero a entero que apunta a la variable donde se va almacenar el indice de la posicion vacia, si no hay almacena -1
+/// @return si los parametros son correctos retorna 1, si los parametros son incorrectos retorna 0
+int buscarPasajeroLibre (Passenger pasajeros[],int tamP,int* pIndice);
+
+/// @fn int swapPasajeros(Passenger*, Passenger*)
+/// @brief copia la informacion de los campos del pasajero2 a la estructura pasajero1
+///
+/// @param Passenger* pasajero1,puntero al tipo de dato Passenger que recibe la informacion copiada
+/// @param Passenger* pasajero2,puntero al tipo de dato Passenger que cede la informacion copiada
+/// @return si los parametros son correctos retorna 1, si los parametros son incorrectos retorna 0
+int swapPasajeros(Passenger* pasajero1,Passenger* pasajero2);
