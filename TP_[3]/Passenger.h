@@ -15,12 +15,14 @@ typedef struct
 	char apellido[50];
 	float precio;
 	int tipoPasajero;
-	char codigoVuelo[4];
+	char codigoVuelo[8];//TIENEN 7 CARACTERES EN LOS ARCHIVOS
 	int isEmpty;
 
 }Passenger;
 
 Passenger* Passenger_new();
+
+//FALTAN PARAMETROS ?
 Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* tipoPasajeroStr);
 void Passenger_delete();
 

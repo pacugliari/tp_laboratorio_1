@@ -13,7 +13,12 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListPassenger)
 {
-    return 1;
+	int todoOk =0;
+	if(path && pArrayListPassenger){
+
+		todoOk=1;
+	}
+    return todoOk;
 }
 
 /** \brief Carga los datos de los pasajeros desde el archivo data.csv (modo binario).
