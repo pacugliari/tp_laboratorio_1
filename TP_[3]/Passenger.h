@@ -14,8 +14,9 @@ typedef struct
 	char nombre[50];
 	char apellido[50];
 	float precio;
-	int tipoPasajero;
-	char codigoVuelo[8];//TIENEN 7 CARACTERES EN LOS ARCHIVOS
+	int idTipoPasajero;
+	char codigoVuelo[50];//TIENEN 7 CARACTERES EN LOS ARCHIVOS
+	int idEstadoVuelo;
 	int isEmpty;
 
 }Passenger;
@@ -23,7 +24,10 @@ typedef struct
 Passenger* Passenger_new();
 
 //FALTAN PARAMETROS ?
-Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* tipoPasajeroStr);
+Passenger* Passenger_newParametros(int id,char* nombre,char* apellido,char* codigoVuelo,int idTipoPasajero,float precio,int idEstadoVuelo);
+
+Passenger* Passenger_newPassenger (Passenger pasajero);
+
 void Passenger_delete();
 
 int Passenger_setId(Passenger* this,int id);
@@ -44,6 +48,7 @@ int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero);
 int Passenger_setPrecio(Passenger* this,float precio);
 int Passenger_getPrecio(Passenger* this,float* precio);
 
-
+int Passenger_setStatusFlight(Passenger* this,int idEstadoVuelo);
+int Passenger_getStatusFlight(Passenger* this,int* idEstadoVuelo);
 
 #endif /* PASSENGER_H_ */

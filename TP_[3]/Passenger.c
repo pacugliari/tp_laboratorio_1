@@ -15,18 +15,27 @@ Passenger* Passenger_new(){
     return nuevoPasajero;
 }
 
-Passenger* Passenger_newParametros(char* idStr,char* nombreStr,char* tipoPasajeroStr){
+Passenger* Passenger_newParametros(int id,char* nombre,char* apellido,char* codigoVuelo,int idTipoPasajero,float precio,int idEstadoVuelo){
 	Passenger* nuevoPasajero = Passenger_new();
-    if(nuevoPasajero && nombreStr && tipoPasajeroStr && idStr){
-        if(!(Passenger_setId(nuevoPasajero,atoi(idStr)) &&
-        	 Passenger_setNombre(nuevoPasajero,nombreStr) &&
-			 Passenger_setTipoPasajero(nuevoPasajero,atoi(tipoPasajeroStr)))){
+    if(nuevoPasajero && nombre && apellido && codigoVuelo){
+        if(!(Passenger_setId(nuevoPasajero,id) &&
+        	 Passenger_setNombre(nuevoPasajero,nombre) &&
+			 Passenger_setApellido(nuevoPasajero,apellido) &&
+			 Passenger_setCodigoVuelo(nuevoPasajero,codigoVuelo) &&
+			 Passenger_setTipoPasajero(nuevoPasajero,idTipoPasajero) &&
+			 Passenger_setPrecio(nuevoPasajero,precio) &&
+			 Passenger_setStatusFlight(nuevoPasajero,idEstadoVuelo))){
 
         		Passenger_delete(nuevoPasajero);
                 nuevoPasajero = NULL;
            }
     }
     return nuevoPasajero;
+}
+
+
+Passenger* Passenger_newPassenger (Passenger pasajero){
+    return Passenger_newParametros(pasajero.id,pasajero.nombre,pasajero.apellido,pasajero.codigoVuelo,pasajero.idTipoPasajero,pasajero.precio,pasajero.idEstadoVuelo);
 }
 
 void Passenger_delete(Passenger* pasajero){
@@ -52,12 +61,13 @@ int Passenger_getId(Passenger* this,int* id){
 
 int Passenger_setNombre(Passenger* this,char* nombre){
     int todoOk = 0;
-    if(this && nombre && strlen(nombre)<50 && strlen(nombre)>2){
+    if(this && nombre){ //VALIDAR NOMBRE
         strcpy(this->nombre,nombre);
         strlwr(this->nombre);
         this->nombre[0] = toupper(this->nombre[0]);
         todoOk = 1;
-    }
+    }else
+    	printf("Error en nombre \n");
     return todoOk;
 }
 
@@ -92,7 +102,7 @@ int Passenger_getApellido(Passenger* this,char* apellido){
 
 int Passenger_setCodigoVuelo(Passenger* this,char* codigoVuelo){
     int todoOk = 0;
-    if(this && codigoVuelo && strlen(codigoVuelo) != 4){
+    if(this && codigoVuelo){ //VALIDAR CODIGO DE VUELO
         strcpy(this->codigoVuelo,codigoVuelo);
         strupr(this->codigoVuelo);
         todoOk = 1;
@@ -112,7 +122,7 @@ int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo){
 int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero){
     int todoOk = 0;
     if(this ){ //VALIDACION DE TIPO DE PASAJERO
-    	this->tipoPasajero = tipoPasajero;
+    	this->idTipoPasajero = tipoPasajero;
         todoOk = 1;
     }
     return todoOk;
@@ -121,7 +131,7 @@ int Passenger_setTipoPasajero(Passenger* this,int tipoPasajero){
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero){
     int todoOk = 0;
     if(this && tipoPasajero){
-        (*tipoPasajero) = this->tipoPasajero;
+        (*tipoPasajero) = this->idTipoPasajero;
         todoOk = 1;
     }
     return todoOk;
@@ -140,6 +150,24 @@ int Passenger_getPrecio(Passenger* this,float* precio){
     int todoOk = 0;
     if(this && precio){
         (*precio) = this->precio;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int Passenger_setStatusFlight(Passenger* this,int idEstadoVuelo){
+    int todoOk = 0;
+    if(this ){ //VALIDACION DE TIPO DE PASAJERO
+    	this->idEstadoVuelo = idEstadoVuelo;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int Passenger_getStatusFlight(Passenger* this,int* idEstadoVuelo){
+    int todoOk = 0;
+    if(this && idEstadoVuelo){
+        (*idEstadoVuelo) = this->idEstadoVuelo;
         todoOk = 1;
     }
     return todoOk;

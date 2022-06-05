@@ -4,6 +4,8 @@
 #include "Controller.h"
 #include "Passenger.h"
 
+
+#define ARCH_DIR "TP_[3]/data.csv"
 /****************************************************
     Menu:
      1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).
@@ -46,6 +48,21 @@
 *****************************************************/
 
 int menu();
+void limpiarLista(LinkedList* listaPasajeros);
+
+void printPassengerData (Passenger p){
+	//char descripcionTipoPasajero [30];
+	//char descripcionEstado [10] = {"INACTIVO"};
+	if(1){
+		//if(p.statusFlight)
+			//strcpy(descripcionEstado,"ACTIVO");
+		//cargarDescripcionTipoPasajero(tiposPasajeros,tamT,p.typePassenger,descripcionTipoPasajero);
+		printf("%d\t%s\t%s\t$%f\t%d\t%s\t%d\n",p.id,
+							p.nombre,p.apellido,p.precio,p.idTipoPasajero,
+							p.codigoVuelo,p.idEstadoVuelo);
+	}else
+		printf("Error en los parametros de printPassengerData \n");
+}
 
 int main()
 {
@@ -58,16 +75,19 @@ int main()
     int option = 0;
 
     LinkedList* listaPasajeros =  ll_newLinkedList();
-    //int cursor = 0;
+	 Passenger* pasajeroActual;
+
+    int cursor = 0;
     do{
-    	//cursor=0;
+    	cursor=0;
          switch(option=menu()){
              case 1:
-            	 //controller_loadFromText("data.csv",listaPasajeros);
-
+            	 limpiarLista(listaPasajeros);
+            	 controller_loadFromText(ARCH_DIR,listaPasajeros);
                  break;
              case 2:
-
+            	 limpiarLista(listaPasajeros);
+            	 controller_loadFromBinary(ARCH_DIR,listaPasajeros);
                  break;
              case 3:
 
@@ -79,16 +99,21 @@ int main()
 
                  break;
              case 6:
-
+            	 printf("Tamanio: %d \n",ll_len(listaPasajeros) );
+            	 while(ll_len(listaPasajeros) > cursor){
+            		 pasajeroActual = ll_get(listaPasajeros,cursor);
+            		 printPassengerData(*pasajeroActual);
+            		 cursor++;
+            	 }
                  break;
              case 7:
 
                  break;
              case 8:
-
+            	 controller_saveAsText(ARCH_DIR,listaPasajeros);
                  break;
              case 9:
-
+            	 controller_saveAsBinary(ARCH_DIR,listaPasajeros);
                  break;
              case 10:
             	 option = 10;
@@ -103,11 +128,25 @@ int main()
          system("cls");
      }while (option != 10 );
 
+    limpiarLista(listaPasajeros);
     ll_deleteLinkedList(listaPasajeros);
 
     return 0;
 }
 
+
+void limpiarLista (LinkedList* listaPasajeros){
+	int cursor = 0;
+	Passenger* pasajeroActual;
+	int tamanioLista = ll_len(listaPasajeros);
+	 while( tamanioLista > cursor){
+		 pasajeroActual = ll_get(listaPasajeros,cursor);
+		 Passenger_delete(pasajeroActual);
+		 cursor++;
+	 }
+	 ll_clear(listaPasajeros);
+	printf("Se limpiaron %d pasajeros de un total de %d cargados en la lista \n",cursor,tamanioLista);
+}
 
 
 int menu(){

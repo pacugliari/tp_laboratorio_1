@@ -16,11 +16,13 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 */
 
+#include "Passenger.h"
+
 #ifndef __LINKEDLIST
 #define __LINKEDLIST
 struct Node
 {
-    int pElement;//DATO
+	Passenger* pElement;//DATO
     struct Node* pNextNode;
 }typedef Node;
 
@@ -36,14 +38,14 @@ struct LinkedList
 //Publicas
 
 Node* test_getNode(LinkedList* this, int nodeIndex);
-int test_addNode(LinkedList* this, int nodeIndex,int pElement);
-int ll_set(LinkedList* this, int index,int pElement);
+int test_addNode(LinkedList* this, int nodeIndex,Passenger* pElement);
+int ll_set(LinkedList* this, int index,Passenger* pElement);
 int ll_clear(LinkedList* this);
-int ll_indexOf(LinkedList* this, int pElement);
+int ll_indexOf(LinkedList* this, Passenger* pElement);
 int ll_isEmpty(LinkedList* this);
-int ll_push(LinkedList* this, int index, int pElement);
-int ll_pop(LinkedList* this,int index);//void*
-int ll_contains(LinkedList* this, int pElement);
+int ll_push(LinkedList* this, int index, Passenger* pElement);
+Passenger* ll_pop(LinkedList* this,int index);//void*
+int ll_contains(LinkedList* this, Passenger* pElement);
 int ll_containsAll(LinkedList* this,LinkedList* this2);
 LinkedList* ll_subList(LinkedList* this,int from,int to);
 LinkedList* ll_clone(LinkedList* this);
@@ -52,8 +54,8 @@ int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 
 //FUNCIONAS A USAR
 int ll_remove(LinkedList* this,int index);//USAR
-int ll_get(LinkedList* this, int index);//void* USAR
+Passenger* ll_get(LinkedList* this, int index);//void* USAR
 int ll_len(LinkedList* this); //USAR
 LinkedList* ll_newLinkedList(void); //USAR
-int ll_add(LinkedList* this, int pElement); //USAR
+int ll_add(LinkedList* this, Passenger* pElement); //USAR
 int ll_deleteLinkedList(LinkedList* this); //USAR
