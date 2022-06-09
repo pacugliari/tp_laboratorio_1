@@ -16,8 +16,7 @@
 #include "estadoVuelo.h"
 #include <string.h>
 
-#define TAMTP 3
-#define TAMEV 3
+
 
 //FORMATO id,name,lastname,price,flycode,typePassenger,statusFlight
 
@@ -28,7 +27,7 @@ int esCadenaValida(char* cadena){
 		strcpy(cadenaAux,cadena);
 		strlwr(cadenaAux);
 		for(int i=0;i<strlen(cadenaAux);i++){
-			if(cadenaAux[i] < 97 || cadenaAux[i] > 122){
+			if((cadenaAux[i] < 97 || cadenaAux[i] > 122) && cadenaAux[i] != ' '){
 				todoOk = 0;
 				break;
 			}
@@ -38,46 +37,47 @@ int esCadenaValida(char* cadena){
 	return todoOk;
 }
 
-int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger)
+int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* pId)
 {
-	int r,i=0;
-	char id[50],name[50],lastname[50],price[50],flycode[50],typePassenger[50],statusFlight[50];
-
-    eTipoPasajero tiposP [TAMTP] = {{10000,"FirstClass"},
-                                  {10001,"ExecutiveClass"},
-                                  {10002,"EconomyClass"}};
-
-    eEstadoVuelo estadosV [TAMEV] = {{20000,"Aterrizado"},
-                                  {20001,"En Horario"},
-                                  {20002,"Demorado"}};
-
+	int datosLeidos,datosCargados=0;
+	char buffer [7][50];
     int indiceTipoPasajero;
     int indiceEstadoVuelo;
-    Passenger* pasajeroNuevo;
+    char encabezados[7][20];
+    eTipoPasajero tiposP [TAMTP];
+    eEstadoVuelo estadosV [TAMEV];
+    Passenger* pasajeroNuevo = NULL;
+    int mayorId;
+    int esPrimero = 1;
 
-	if(pFile == NULL && pArrayListPassenger)
-	{
-		printf("\nEl archivo no puede ser abierto");
-	    return -1;
-	}else{
-		do
-			{
-			    r = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",id,name,lastname,price,flycode,typePassenger,statusFlight);
-			    if(r==7 && esCadenaValida(name) && esCadenaValida(lastname))
-			    {
-					buscarTipoPasajero(tiposP,TAMTP,typePassenger,&indiceTipoPasajero);
-					buscarEstadoVuelo(estadosV,TAMEV,statusFlight,&indiceEstadoVuelo);
-					pasajeroNuevo = Passenger_newParametros(atoi(id),name,lastname,flycode,tiposP[indiceTipoPasajero].id,
-							atof(price),estadosV[indiceEstadoVuelo].id);
-					ll_add(pArrayListPassenger,pasajeroNuevo);
-			        i++;
-			    }
+    hardcodearTiposPasajeros(tiposP,TAMTP);
+    hardcodearEstadosVuelo(estadosV,TAMEV);
+
+    //FORMATO id,name,lastname,price,flycode,typePassenger,statusFlight
+    fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",encabezados[0],encabezados[1],encabezados[2],encabezados[3],encabezados[4],
+    		encabezados[5],encabezados[6]); //LECTURA FANTASMA PARA ELMINAR ENCABEZADO
+
+	do{
+		datosLeidos = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",buffer[0],buffer[1],buffer[2],buffer[3],
+				buffer[4],buffer[5],buffer[6]);
+		if(datosLeidos==7 && esCadenaValida(buffer[1]) && esCadenaValida(buffer[2])){
+			buscarTipoPasajeroPorDescripcion(tiposP,TAMTP,buffer[5],&indiceTipoPasajero);
+			buscarEstadoVueloPorDescripcion(estadosV,TAMEV,buffer[6],&indiceEstadoVuelo);
+			pasajeroNuevo = Passenger_newParametros(atoi(buffer[0]),buffer[1],buffer[2],atof(buffer[3]),buffer[4],tiposP[indiceTipoPasajero].id,
+					estadosV[indiceEstadoVuelo].id);
+			if(pasajeroNuevo){
+				if(pasajeroNuevo->id > mayorId || esPrimero){
+					mayorId = pasajeroNuevo->id;
+					esPrimero = 0;
+				}
+				ll_add(pArrayListPassenger,pasajeroNuevo);
+				datosCargados++;
 			}
-			while(!feof(pFile));
-	}
+		}
+	}while(!feof(pFile));
 
-	fclose(pFile);
-	return i;
+	(*pId) = mayorId +1;
+	return datosCargados;
 }
 
 
@@ -88,29 +88,28 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger)
  * \return int
  *
  */
-int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger)
+int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger,int* pId)
 {
-	int r,i=0;
+	int datosLeidos,datosCargados=0;
 	Passenger pasajeroLeido;
-	rewind(pFile);
-	if(pFile == NULL && pArrayListPassenger)
+	int mayorId;
+	int esPrimero = 1;
+
+	do
 	{
-		printf("\nEl archivo no puede ser abierto");
-	    return -1;
-	}else{
-			do
-			{
-			    r = fread(&pasajeroLeido,sizeof(Passenger),1,pFile);
-			    if(r==1)
-			    {
-
-					ll_add(pArrayListPassenger,Passenger_newPassenger(pasajeroLeido));
-			        i++;
-			    }
+		datosLeidos = fread(&pasajeroLeido,sizeof(Passenger),1,pFile);
+		if(datosLeidos==1)
+		{
+			if(esPrimero || pasajeroLeido.id > mayorId){
+				mayorId = pasajeroLeido.id;
+				esPrimero = 0;
 			}
-			while(!feof(pFile));
+			ll_add(pArrayListPassenger,Passenger_newPassenger(pasajeroLeido));
+			datosCargados++;
+		}
 	}
+	while(!feof(pFile));
 
-	fclose(pFile);
-	return i;
+	(*pId) = mayorId +1;
+	return datosCargados;
 }

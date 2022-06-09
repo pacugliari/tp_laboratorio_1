@@ -15,5 +15,12 @@ typedef struct{
 
 #endif /* TP__3__ESTADOVUELO_H_ */
 
+#define TAMEV 3
 
-int buscarEstadoVuelo (eEstadoVuelo estadoV[],int tamEstadoV,char* descripcion,int* pIndice);
+int hardcodearEstadosVuelo(eEstadoVuelo* vector,int tam);
+int cargarDescripcionEstadoVuelo (eEstadoVuelo estadoV[],int tamE,int id,char descripcion[]);
+int buscarEstadoVueloPorId (eEstadoVuelo estadoV[],int tamEstadoV,int id,int* pIndice);
+int buscarEstadoVueloPorDescripcion (eEstadoVuelo estadoV[],int tamEstadoV,char* descripcion,int* pIndice);
+int pedirEstadoVuelo(eEstadoVuelo estadosV[],int tamE,int* idEstadoV);
+int validarEstadoVuelo (eEstadoVuelo estadosV[],int tamE,int id);
+int listarEstadosVuelos (eEstadoVuelo estadosV[],int tamE);

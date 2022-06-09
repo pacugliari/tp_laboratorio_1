@@ -12,10 +12,12 @@
 
 Passenger* Passenger_new(){
 	Passenger* nuevoPasajero = (Passenger*) calloc(1,sizeof(Passenger));
+	nuevoPasajero->isEmpty = 0;
     return nuevoPasajero;
 }
 
-Passenger* Passenger_newParametros(int id,char* nombre,char* apellido,char* codigoVuelo,int idTipoPasajero,float precio,int idEstadoVuelo){
+
+Passenger* Passenger_newParametros(int id,char* nombre,char* apellido,float precio,char* codigoVuelo,int idTipoPasajero,int idEstadoVuelo){
 	Passenger* nuevoPasajero = Passenger_new();
     if(nuevoPasajero && nombre && apellido && codigoVuelo){
         if(!(Passenger_setId(nuevoPasajero,id) &&
@@ -33,9 +35,13 @@ Passenger* Passenger_newParametros(int id,char* nombre,char* apellido,char* codi
     return nuevoPasajero;
 }
 
+Passenger* Passenger_newParametrosString(char* id,char* nombre,char* apellido,char* precio,char* codigoVuelo,char* idTipoPasajero,char* idEstadoVuelo){
+	return Passenger_newParametros(atoi(id),nombre,apellido,atof(precio),codigoVuelo,atoi(idTipoPasajero),atoi(idEstadoVuelo));
+}
+
 
 Passenger* Passenger_newPassenger (Passenger pasajero){
-    return Passenger_newParametros(pasajero.id,pasajero.nombre,pasajero.apellido,pasajero.codigoVuelo,pasajero.idTipoPasajero,pasajero.precio,pasajero.idEstadoVuelo);
+    return Passenger_newParametros(pasajero.id,pasajero.nombre,pasajero.apellido,pasajero.precio,pasajero.codigoVuelo,pasajero.idTipoPasajero,pasajero.idEstadoVuelo);
 }
 
 void Passenger_delete(Passenger* pasajero){
