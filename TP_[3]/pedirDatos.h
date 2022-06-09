@@ -21,12 +21,11 @@
 
 
 int pedirId(void);
-int pedirDatosAlta (Passenger* pasajero,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosV[],int tamE);
-char pedirConfirmacion (Passenger pasajero,int tipo,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosVuelos[],int tamE);
+int pedirDatosAlta (Passenger* pasajero,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos);
+char pedirConfirmacion (Passenger pasajero,int tipo,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos);
 void pedirCodigoVuelo(char codigoVuelo[]);
 void pedirPrecio (float* precio);
 void pedirApellido (char apellido[]);
 void pedirNombre(char nombre[]);
 int pedirMenuModificar();
 
-void printPassengerData (Passenger p,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosVuelos[],int tamE);

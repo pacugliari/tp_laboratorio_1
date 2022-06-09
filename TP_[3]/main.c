@@ -3,51 +3,22 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Passenger.h"
+#include "TipoPasajero.h"
+#include "EstadoVuelo.h"
 #include <string.h>
-
-
-#define ARCH_DIR "TP_[3]/data.csv"
-/****************************************************
-
-	Las funciones del LinkedList que deben utilizarse como mínimo son las siguientes:
-	LinkedList* ll_newLinkedList(void) -USADA
-	void ll_deleteLinkedList(LinkedList* self) ->USADA
-	void ll_add(LinkedList* self , void* element) USADA
-	void ll_remove(LinkedList* self , int index) -FALTA
-	void* ll_get(LinkedList* self , int index) USADA
-	int ll_len(LinkedList* self ) USADA
-
-*****************************************************/
 
 int menu();
 void limpiarLista(LinkedList* listaPasajeros);
-
-int pedirPath(char* path){
-	int todoOk = 0;
-	char pathAux [20];
-	if(path){
-		 path[0]='\0';
-		 strcat(path,"TP_[3]/");
-		 printf("Ingrese el Path: ");
-		 fflush(stdin);
-		 gets(pathAux);
-		 fflush(stdin);
-		 strcat(path,pathAux);
-		 todoOk = 1;
-	}
-
-	 return todoOk;
-}
+int pedirPath(char* path);
 
 int main()
 {
-
-	//DEBE HABER POR LOMENOS UN ELEMENTO CARGADO PARA SALIR
-	//PEDIDO DE DATOS NO PUEDE ESTAR EN LA MISMA QUE PASAJEROS
-
 	setvbuf(stdout, NULL, _IONBF, 0);//AGREGADO PARA EVITAR BUG CONSOLA ECLIPSE
     int option = 0;
     LinkedList* listaPasajeros =  ll_newLinkedList();
+    LinkedList* tiposPasajeros = TiposPasajeros_newLista();
+    LinkedList* estadosVuelos = EstadosVuelos_newLista();
+
 	char path[50];
     int id= 1;
     int seGuardoArchivo = 0;
@@ -63,23 +34,23 @@ int main()
             		 controller_loadFromBinary(path,listaPasajeros,&id);
                  break;
              case 3:
-            	 if(controller_addPassenger(listaPasajeros,&id));
+            	 controller_addPassenger(listaPasajeros,&id,tiposPasajeros,estadosVuelos);
                  break;
              case 4:
-            	 controller_editPassenger(listaPasajeros);
+            	 controller_editPassenger(listaPasajeros,tiposPasajeros,estadosVuelos);
                  break;
              case 5:
-
+            	 controller_removePassenger(listaPasajeros,tiposPasajeros,estadosVuelos);
                  break;
              case 6:
-            	 controller_ListPassenger(listaPasajeros);
+            	 controller_ListPassenger(listaPasajeros,tiposPasajeros,estadosVuelos);
                  break;
              case 7:
 
                  break;
              case 8:
             	 if(pedirPath(path))
-            		 seGuardoArchivo = controller_saveAsText(path,listaPasajeros);
+            		 seGuardoArchivo = controller_saveAsText(path,listaPasajeros,tiposPasajeros,estadosVuelos);
                  break;
              case 9:
             	 if(pedirPath(path))
@@ -105,6 +76,8 @@ int main()
 
     limpiarLista(listaPasajeros);
     ll_deleteLinkedList(listaPasajeros);
+	EstadosVuelos_deleteLista(estadosVuelos);
+	TiposPasajeros_deleteLista(tiposPasajeros);
 
     return 0;
 }
@@ -127,16 +100,22 @@ void limpiarLista (LinkedList* listaPasajeros){
 int menu(){
     int respuesta;
 
-    printf("1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n");
-    printf("2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n");
-    printf("3. Alta de pasajero\n");
-    printf("4. Modificar datos de pasajero\n");
-    printf("5. Baja de pasajero\n");
-    printf("6. Listar pasajeros\n");
-    printf("7. Ordenar pasajeros\n");
-    printf("8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).\n");
-    printf("9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).\n");
-    printf("10. Salir \n\n");
+	printf("-------------------------------------------------------------------------------------------------------------------------------"
+			"------------------------\n");
+    printf("Menu: \n");
+    printf("\t1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n");
+    printf("\t2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n");
+    printf("\t3. Alta de pasajero\n");
+    printf("\t4. Modificar datos de pasajero\n");
+    printf("\t5. Baja de pasajero\n");
+    printf("\t6. Listar pasajeros\n");
+    printf("\t7. Ordenar pasajeros\n");
+    printf("\t8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).\n");
+    printf("\t9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).\n");
+    printf("\t10. Salir \n\n");
+	printf("-------------------------------------------------------------------------------------------------------------------------------"
+			"------------------------\n");
+	printf("Ingrese opcion: ");
 
     scanf("%d",&respuesta);
     fflush(stdin);
@@ -145,5 +124,29 @@ int menu(){
     return respuesta;
 
 }
+
+int pedirPath(char* path){
+	int todoOk = 0;
+	char pathAux [30];
+	if(path){
+		 path[0]='\0';
+		 strcat(path,"TP_[3]/");
+		 printf("Ingrese el Path: ");
+		 fflush(stdin);
+		 gets(pathAux);
+		 fflush(stdin);
+		 while(strlen(pathAux) <= 0 || strlen(pathAux) >= 20){
+			 printf("Ingrese un Path mas corto/largo: ");
+			 fflush(stdin);
+			 gets(pathAux);
+			 fflush(stdin);
+		 }
+		 strcat(path,pathAux);
+		 todoOk = 1;
+	}
+
+	 return todoOk;
+}
+
 
 

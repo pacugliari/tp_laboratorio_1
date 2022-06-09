@@ -2,8 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include "pedirDatos.h"
+#include "Controller.h"
 #include "Passenger.h"
+#include "pedirDatos.h"
 
 int pedirMenuModificar(){
 	int respuesta;
@@ -20,22 +21,9 @@ int pedirMenuModificar(){
 	return respuesta;
 }
 
-void printPassengerData (Passenger p,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosVuelos[],int tamE){
-	char descripcionTipoPasajero [30];
-	char descripcionEstado [30];
-	if(tiposPasajeros && tamT >0 && estadosVuelos && tamE > 0){
-		cargarDescripcionTipoPasajero(tiposPasajeros,tamT,p.idTipoPasajero,descripcionTipoPasajero);
-		cargarDescripcionEstadoVuelo(estadosVuelos,tamE,p.idEstadoVuelo,descripcionEstado);
-		printf("%04d\t\t%-16s%-24s$%10.2f\t\t%-30s\t%-10s\t\t%-s\n",p.id,
-									p.nombre,p.apellido,p.precio,descripcionTipoPasajero,
-									p.codigoVuelo,descripcionEstado);
-	}else
-		printf("Error en los parametros de printPassengerData \n");
-}
-
-char pedirConfirmacion (Passenger pasajero,int tipo,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosVuelos[],int tamE){
+char pedirConfirmacion (Passenger pasajero,int tipo,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos){
 	char respuesta = 'n';
-	if(!pasajero.isEmpty && tiposPasajeros && tamT>0 && estadosVuelos && tamE > 0){
+	if(listaTiposPasajeros && listaEstadosVuelos){
 		if(tipo==MODIFICAR){
 			printf("Desea modificar el siguiente pasajero ? s-n \n\n");
 		}else
@@ -44,7 +32,7 @@ char pedirConfirmacion (Passenger pasajero,int tipo,eTipoPasajero tiposPasajeros
 		printf("ID\t\tNombre\t\tApellido\t\t    Precio\t\tTipo de Pasajero\t\tCodigo de vuelo\t\tEstado de vuelo\n");
 		printf("-------------------------------------------------------------------------------------------------------------------------------"
 				"------------------------\n");
-		printPassengerData(pasajero,tiposPasajeros,tamT,estadosVuelos,tamE);
+		printPassengerData(pasajero,listaTiposPasajeros,listaEstadosVuelos);
 		printf("-------------------------------------------------------------------------------------------------------------------------------"
 				"------------------------\n");
 		fflush(stdin);
@@ -58,11 +46,11 @@ char pedirConfirmacion (Passenger pasajero,int tipo,eTipoPasajero tiposPasajeros
 
 void pedirNombre(char nombre[]){
 	if(nombre){
-		printf("Ingrese el nombre del pasajero \n");
+		printf("Ingrese el nombre del pasajero: ");
 		gets(nombre);
 		fflush(stdin);
-		while(strlen(nombre) >50){
-			printf("Ingrese un nombre mas corto \n");
+		while(strlen(nombre) >50  || strlen(nombre)<=1){
+			printf("Ingrese un nombre mas corto/largo: ");
 			gets(nombre);
 			fflush(stdin);
 		}
@@ -72,11 +60,11 @@ void pedirNombre(char nombre[]){
 
 void pedirApellido (char apellido[]){
 	if(apellido){
-		printf("Ingrese el apellido del pasajero \n");
+		printf("Ingrese el apellido del pasajero: ");
 		gets(apellido);
 		fflush(stdin);
-		while(strlen(apellido) >50){
-			printf("Ingrese un apellido mas corto \n");
+		while(strlen(apellido) >50 || strlen(apellido)<=1){
+			printf("Ingrese un apellido mas corto/largo: ");
 			gets(apellido);
 			fflush(stdin);
 		}
@@ -86,11 +74,11 @@ void pedirApellido (char apellido[]){
 
 void pedirPrecio (float* precio){
 	if(precio){
-		printf("Ingrese el precio del vuelo \n");
+		printf("Ingrese el precio del vuelo $: ");
 		scanf("%f",precio);
 		fflush(stdin);
 		while(*precio < 0){
-			printf("Error en precio, ingrese un precio positivo \n$: ");
+			printf("Error en precio, ingrese un precio positivo $: ");
 			scanf("%f",precio);
 		}
 	}else
@@ -101,11 +89,11 @@ void pedirPrecio (float* precio){
 
 void pedirCodigoVuelo(char codigoVuelo[]){
 	if(codigoVuelo){
-		printf("Ingrese el codigo de vuelo del pasajero \n");
+		printf("Ingrese el codigo de vuelo del pasajero: ");
 		gets(codigoVuelo);
 		fflush(stdin);
-		while(strlen(codigoVuelo) >9){
-			printf("Ingrese un codigo de vuelo mas corto, hasta 9 caracteres \n");
+		while(strlen(codigoVuelo) >7 || strlen(codigoVuelo) <= 0){
+			printf("Ingrese un codigo de vuelo mas corto/largo, hasta 7 caracteres: ");
 			gets(codigoVuelo);
 			fflush(stdin);
 		}
@@ -115,17 +103,17 @@ void pedirCodigoVuelo(char codigoVuelo[]){
 
 
 
-int pedirDatosAlta (Passenger* pasajero,eTipoPasajero tiposPasajeros[],int tamT,eEstadoVuelo estadosV[],int tamE){
+int pedirDatosAlta (Passenger* pasajero,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos){
 	int todoOk = 0;
 
-	if(pasajero && tiposPasajeros && tamT>0 && estadosV && tamE > 0){
+	if(pasajero && listaTiposPasajeros && listaEstadosVuelos){
 
 		pedirNombre(pasajero->nombre);
 		pedirApellido(pasajero->apellido);
 		pedirPrecio(&pasajero->precio);
 		pedirCodigoVuelo(pasajero->codigoVuelo);
-		pedirTipoPasajero(tiposPasajeros,tamT,&pasajero->idTipoPasajero);
-		pedirEstadoVuelo(estadosV,tamE,&pasajero->idEstadoVuelo);
+		pedirTipoPasajero(listaTiposPasajeros,&pasajero->idTipoPasajero);
+		pedirEstadoVuelo(listaEstadosVuelos,&pasajero->idEstadoVuelo);
 		todoOk = 1;
 	}
 	return todoOk;

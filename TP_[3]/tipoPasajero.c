@@ -11,32 +11,105 @@
 #include "stdio.h"
 #include <string.h>
 
+eTipoPasajero* TipoPasajero_new(){
+	eTipoPasajero* nuevoTipo = (eTipoPasajero*) calloc(1,sizeof(eTipoPasajero));
+    return nuevoTipo;
+}
 
 
-int hardcodearTiposPasajeros (eTipoPasajero* vector,int tam){
+eTipoPasajero* TipoPasajero_newParametros(int id,char* descripcion){
+	eTipoPasajero* nuevoTipo = TipoPasajero_new();
+    if(nuevoTipo && descripcion ){
+        if(!(TipoPasajero_setId(nuevoTipo,id) && TipoPasajero_setDescripcion(nuevoTipo,descripcion))){
+        	TipoPasajero_delete(nuevoTipo);
+        	nuevoTipo = NULL;
+           }
+    }
+    return nuevoTipo;
+}
+
+LinkedList* TiposPasajeros_newLista (){
+	LinkedList* todoOk = ll_newLinkedList();
+	eTipoPasajero* tipoActual;
+
+	if(todoOk){
+		tipoActual = TipoPasajero_newParametros(10000,"FirstClass");
+		if(tipoActual)
+			ll_add(todoOk,tipoActual);
+		tipoActual = TipoPasajero_newParametros(10001,"ExecutiveClass");
+		if(tipoActual)
+			ll_add(todoOk,tipoActual);
+		tipoActual = TipoPasajero_newParametros(10002,"EconomyClass");
+		if(tipoActual)
+			ll_add(todoOk,tipoActual);
+	}
+
+	return todoOk;
+}
+
+int TiposPasajeros_deleteLista(LinkedList* lista){
 	int todoOk = 0;
-	if(vector && tam >0 && tam <= 3){
-	    eTipoPasajero tiposP [3] = {{10000,"FirstClass"},
-	                                  {10001,"ExecutiveClass"},
-	                                  {10002,"EconomyClass"}};
-
-		for(int i=0;i<tam;i++){
-			vector[i].id = tiposP[i].id;
-			strcpy(vector[i].descripcion,tiposP[i].descripcion);
+	eTipoPasajero* tipoActual;
+	if(lista){
+		for(int i=0;i<ll_len(lista);i++){
+			tipoActual = (eTipoPasajero*) ll_get(lista,i);
+			TipoPasajero_delete(tipoActual);
 		}
+		ll_deleteLinkedList(lista);
 		todoOk = 1;
 	}
 	return todoOk;
+}
 
+void TipoPasajero_delete(eTipoPasajero* tipoPasajero){
+	free(tipoPasajero);
+}
+
+int TipoPasajero_setId(eTipoPasajero* this,int id){
+    int todoOk = 0;
+    if(this && id >= 10000 && id <= 19999 ){ //VALIDACION DE ID
+    	this->id = id;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+int TipoPasajero_getId(eTipoPasajero* this,int* id){
+    int todoOk = 0;
+    if(this && id){
+        (*id) = this->id;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int TipoPasajero_setDescripcion(eTipoPasajero* this,char* descripcion){
+    int todoOk = 0;
+    if(this && descripcion && strlen(descripcion) > 0 && strlen(descripcion) < 25){
+        strcpy(this->descripcion,descripcion);
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int TipoPasajero_getDescripcion(eTipoPasajero* this,char* descripcion){
+    int todoOk = 0;
+    if(this && descripcion){
+        strcpy(descripcion,this->descripcion);
+        todoOk = 1;
+    }
+    return todoOk;
 }
 
 
-int buscarTipoPasajeroPorDescripcion (eTipoPasajero tiposP[],int tamP,char* descripcion,int* pIndice){
+int buscarTipoPasajeroPorDescripcion (LinkedList* lista,char* descripcion,int* pIndice){
     int todoOk = 0;
-    if(tiposP && tamP >0 && pIndice){
+    eTipoPasajero* tipoActual;
+
+    if(lista&& pIndice){
         *pIndice = -1;
-        for(int i=0;i<tamP;i++){
-            if(!strcmp(tiposP[i].descripcion,descripcion)){
+        for(int i=0;i<ll_len(lista);i++){
+        	tipoActual = (eTipoPasajero*) ll_get(lista,i);
+            if(!strcmp(tipoActual->descripcion,descripcion)){
                 *pIndice = i;
                 break;
             }
@@ -46,12 +119,15 @@ int buscarTipoPasajeroPorDescripcion (eTipoPasajero tiposP[],int tamP,char* desc
     return todoOk;
 }
 
-int buscarTipoPasajeroPorId (eTipoPasajero tiposP[],int tamP,int id,int* pIndice){
+int buscarTipoPasajeroPorId (LinkedList* lista,int id,int* pIndice){
     int todoOk = 0;
-    if(tiposP && tamP >0 && pIndice){
+    eTipoPasajero* tipoActual;
+
+    if(lista && pIndice){
         *pIndice = -1;
-        for(int i=0;i<tamP;i++){
-            if(tiposP[i].id == id){
+        for(int i=0;i<ll_len(lista);i++){
+        	tipoActual = (eTipoPasajero*) ll_get(lista,i);
+            if(tipoActual->id == id){
                 *pIndice = i;
                 break;
             }
@@ -61,17 +137,19 @@ int buscarTipoPasajeroPorId (eTipoPasajero tiposP[],int tamP,int id,int* pIndice
     return todoOk;
 }
 
-int listarTiposPasajeros (eTipoPasajero tiposP[],int tamP){
+int listarTiposPasajeros (LinkedList* lista){
     int todoOk = 0;
+    eTipoPasajero* tipoActual;
 
-    if(tiposP && tamP>0){
+    if(lista){
         system("cls");
         printf("  ***LISTADO DE TIPOS DE PASAJEROS***\n");
         printf("-------------------------------\n");
         printf("ID\tTipo de pasajero\n");
         printf("-------------------------------\n");
-        for(int i=0;i<tamP;i++){
-            printf("%d\t%-10s\n",tiposP[i].id,tiposP[i].descripcion);
+        for(int i=0;i<ll_len(lista);i++){
+        	tipoActual = (eTipoPasajero*) ll_get(lista,i);
+            printf("%d\t%-10s\n",tipoActual->id,tipoActual->descripcion);
         }
         printf("-------------------------------\n\n");
         todoOk= 1;
@@ -84,11 +162,11 @@ int listarTiposPasajeros (eTipoPasajero tiposP[],int tamP){
 
 
 
-int validarTipoPasajero (eTipoPasajero tiposP[],int tamP,int id){
+int validarTipoPasajero (LinkedList* lista,int id){
     int todoOk = 0;
     int indice;
-    if(tiposP && tamP > 0){
-    	buscarTipoPasajeroPorId (tiposP,tamP,id,&indice);
+    if(lista){
+    	buscarTipoPasajeroPorId (lista,id,&indice);
         if(indice != -1)
             todoOk = 1;
     }
@@ -96,17 +174,17 @@ int validarTipoPasajero (eTipoPasajero tiposP[],int tamP,int id){
 }
 
 
-int pedirTipoPasajero(eTipoPasajero tiposP[],int tamP,int* idTiposP){
+int pedirTipoPasajero(LinkedList* lista,int* id){
     int todoOk=0;
-    if(tiposP && tamP >0 && idTiposP){
-    	listarTiposPasajeros(tiposP,tamP);
+    if(lista && id){
+    	listarTiposPasajeros(lista);
         printf("Ingrese el ID del tipo de pasajero \n");
-        scanf("%d",idTiposP);
+        scanf("%d",id);
         fflush(stdin);
 
-        while(!validarTipoPasajero(tiposP,tamP,*idTiposP)){
+        while(!validarTipoPasajero(lista,*id)){
             printf("Error en la ID del tipo de pasajero.Vuelva a ingresar \n");
-            scanf("%d",idTiposP);
+            scanf("%d",id);
             fflush(stdin);
         }
         todoOk = 1;
@@ -115,11 +193,14 @@ int pedirTipoPasajero(eTipoPasajero tiposP[],int tamP,int* idTiposP){
 
 }
 
-int cargarDescripcionTipoPasajero (eTipoPasajero tiposP[],int tamP,int id,char descripcion[]){
+int cargarDescripcionTipoPasajero (LinkedList* lista,int id,char descripcion[]){
     int todoOk = 0;
     int indice;
-    if(tiposP && tamP >0 && descripcion && buscarTipoPasajeroPorId(tiposP,tamP,id,&indice)){
-        strcpy(descripcion,tiposP[indice].descripcion);
+    eTipoPasajero* tipoActual;
+
+    if(lista && descripcion && buscarTipoPasajeroPorId(lista,id,&indice)){
+    	tipoActual = (eTipoPasajero*) ll_get(lista,indice);
+        strcpy(descripcion,tipoActual->descripcion);
         todoOk = 1;
     }
     return todoOk;

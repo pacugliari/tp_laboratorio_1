@@ -15,10 +15,8 @@ typedef struct
 	char apellido[50];
 	float precio;
 	int idTipoPasajero;
-	char codigoVuelo[50];//TIENEN 7 CARACTERES EN LOS ARCHIVOS
+	char codigoVuelo[8];//TIENEN 7 CARACTERES EN LOS ARCHIVOS
 	int idEstadoVuelo;
-	int isEmpty;
-
 }Passenger;
 
 #endif /* PASSENGER_H_ */

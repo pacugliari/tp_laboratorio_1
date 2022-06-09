@@ -1,5 +1,5 @@
 id,name,lastname,price,flycode,typePassenger,statusFlight
-1,Pablo,Cugliari,100.000000,PC100,ExecutiveClass,Aterrizado
+1,Lou,Gonzalez,10000.000000,BA2491A,FirstClass,Aterrizado
 2,Ulrike,Munoz,25000.000000,IB0800A,FirstClass,Aterrizado
 3,Brade,Rojas,20000.000000,MM0987B,FirstClass,En Horario
 4,Kimbell,Diaz,50000.000000,BA2491A,FirstClass,Aterrizado
@@ -420,92 +420,92 @@ id,name,lastname,price,flycode,typePassenger,statusFlight
 419,Ed,Vega,18000.000000,TU6789B,EconomyClass,Aterrizado
 420,Lothaire,Campos,12000.000000,TU6789B,EconomyClass,Aterrizado
 421,Neila,Sandoval,15000.000000,TU6789B,EconomyClass,Aterrizado
-422,Jennifer,Orellana,15000.000000,GU2345F,FirstClass,En Horario
-423,Keelby,Cardenas,15000.000000,GU2345F,FirstClass,En Horario
-424,Chuck,Olivares,33000.000000,GU2345F,FirstClass,En Horario
-425,Jordan,Alarcon,33000.000000,GU2345F,FirstClass,En Horario
-426,Minnnie,Gallardo,20000.000000,GU2345F,FirstClass,En Horario
-427,Carine,Ortiz,33000.000000,GU2345F,FirstClass,En Horario
-428,Kelly,Garrido,37000.000000,GU2345F,FirstClass,En Horario
-429,Coleman,Salazar,25000.000000,GU2345F,FirstClass,En Horario
-430,Pincus,Guzman,42000.000000,GU2345F,FirstClass,En Horario
-431,Smitty,Henriquez,15000.000000,GU2345F,FirstClass,En Horario
-432,Wade,Saavedra,12000.000000,GU2345F,FirstClass,En Horario
-433,Emmit,Navarro,12000.000000,GU2345F,FirstClass,En Horario
-434,Brietta,Aguilera,42000.000000,GU2345F,FirstClass,En Horario
-435,Wesley,Parra,10000.000000,GU2345F,FirstClass,En Horario
-436,Felicdad,Romero,18000.000000,GU2345F,FirstClass,En Horario
-437,Any,Aravena,18000.000000,GU2345F,FirstClass,En Horario
-438,Gardie,Vargas,12000.000000,GU2345F,FirstClass,En Horario
-439,Leelah,Vazquez,25000.000000,GU2345F,FirstClass,En Horario
-440,Garold,Caceres,20000.000000,GU2345F,FirstClass,En Horario
-441,Regine,Yanez,10000.000000,GU2345F,FirstClass,En Horario
-442,Tam,Leiva,20000.000000,GU2345F,ExecutiveClass,En Horario
-443,Davon,Escobar,20000.000000,GU2345F,ExecutiveClass,En Horario
-444,Chrissy,Ruiz,18000.000000,GU2345F,ExecutiveClass,En Horario
-445,Ozzie,Valdes,20000.000000,GU2345F,ExecutiveClass,En Horario
-446,Rina,Vidal,20000.000000,GU2345F,ExecutiveClass,En Horario
-447,Guy,Salinas,42000.000000,GU2345F,ExecutiveClass,En Horario
-448,Lenora,Zuniga,18000.000000,GU2345F,ExecutiveClass,En Horario
-449,Julietta,Pena,42000.000000,GU2345F,ExecutiveClass,En Horario
-450,Alexandr,Godoy,18000.000000,GU2345F,ExecutiveClass,En Horario
-451,Margalit,Lagos,15000.000000,GU2345F,ExecutiveClass,En Horario
-452,Samara,Maldonado,50000.000000,GU2345F,ExecutiveClass,En Horario
-453,Portie,Bustos,15000.000000,GU2345F,ExecutiveClass,En Horario
-454,Korella,Medina,33000.000000,GU2345F,ExecutiveClass,En Horario
-455,Hilly,Pino,30000.000000,GU2345F,ExecutiveClass,En Horario
-456,Leeanne,Palma,10000.000000,GU2345F,ExecutiveClass,En Horario
-457,Arnaldo,Moreno,10000.000000,GU2345F,ExecutiveClass,En Horario
-458,Kassi,Sanhueza,37000.000000,GU2345F,ExecutiveClass,En Horario
-459,Karen,Carvajal,20000.000000,GU2345F,ExecutiveClass,En Horario
-460,Mac,Navarrete,20000.000000,GU2345F,ExecutiveClass,En Horario
-461,Anthia,Saez,37000.000000,GU2345F,ExecutiveClass,En Horario
-462,Marsiella,Alvarado,20000.000000,GU2345F,ExecutiveClass,En Horario
-463,Shea,Donoso,12000.000000,GU2345F,ExecutiveClass,En Horario
-464,Liana,Poblete,15000.000000,GU2345F,ExecutiveClass,En Horario
-465,Carley,Bustamante,12000.000000,GU2345F,ExecutiveClass,En Horario
-466,Carlye,Toro,37000.000000,GU2345F,ExecutiveClass,En Horario
-467,Svend,Ortega,25000.000000,GU2345F,ExecutiveClass,En Horario
-468,Kendell,Venegas,25000.000000,GU2345F,ExecutiveClass,En Horario
-469,Chrisy,Guerrero,15000.000000,GU2345F,ExecutiveClass,En Horario
-470,Rod,Mendoza,50000.000000,GU2345F,ExecutiveClass,En Horario
-471,Ramsay,Farias,20000.000000,GU2345F,ExecutiveClass,En Horario
-472,Saidee,San martin,50000.000000,GU2345F,ExecutiveClass,En Horario
-473,Erek,Gonzalez,10000.000000,GU2345F,ExecutiveClass,En Horario
-474,Salomi,Fernandez,10000.000000,GU2345F,ExecutiveClass,En Horario
-475,Coletta,Rodriguez,50000.000000,GU2345F,ExecutiveClass,En Horario
-476,Abigael,Lopez,12000.000000,GU2345F,ExecutiveClass,En Horario
-477,Mariele,Martinez,33000.000000,GU2345F,EconomyClass,En Horario
-478,Brooke,Sanchez,20000.000000,GU2345F,EconomyClass,En Horario
-479,Benita,Perez,25000.000000,GU2345F,EconomyClass,En Horario
-480,Marissa,Gomez,37000.000000,GU2345F,EconomyClass,En Horario
-481,Lionello,Martin,37000.000000,GU2345F,EconomyClass,En Horario
-482,Tori,Jimenez,42000.000000,GU2345F,EconomyClass,En Horario
-483,Micheil,Ruiz,37000.000000,GU2345F,EconomyClass,En Horario
-484,Kym,Hernandez,20000.000000,GU2345F,EconomyClass,En Horario
-485,Melisse,Diaz,10000.000000,GU2345F,EconomyClass,En Horario
-486,Bartholomew,Moreno,33000.000000,GU2345F,EconomyClass,En Horario
-487,Rorie,Alvarez,25000.000000,GU2345F,EconomyClass,En Horario
-488,Hedvige,Munoz,37000.000000,GU2345F,EconomyClass,En Horario
-489,Dorothea,Romero,15000.000000,GU2345F,EconomyClass,En Horario
-490,Tamarah,Alonso,50000.000000,GU2345F,EconomyClass,En Horario
-491,Skipton,Gutierrez,10000.000000,GU2345F,EconomyClass,En Horario
-492,Minny,Navarro,33000.000000,GU2345F,EconomyClass,En Horario
-493,Joshia,Torres,33000.000000,GU2345F,EconomyClass,En Horario
-494,Mirilla,Dominguez,30000.000000,GU2345F,EconomyClass,En Horario
-495,Willey,Vazquez,15000.000000,GU2345F,EconomyClass,En Horario
-496,Conrado,Ramos,50000.000000,GU2345F,EconomyClass,En Horario
-497,Fredia,Gonzalez,30000.000000,GU2345F,EconomyClass,En Horario
-498,Gretchen,Munoz,12000.000000,GU2345F,EconomyClass,En Horario
-499,Bibbie,Rojas,37000.000000,GU2345F,EconomyClass,En Horario
-500,Warren,Diaz,25000.000000,GU2345F,EconomyClass,En Horario
-501,Gabi,Perez,30000.000000,GU2345F,EconomyClass,En Horario
-502,Callie,Soto,50000.000000,GU2345F,EconomyClass,En Horario
-503,Patton,Contreras,15000.000000,GU2345F,EconomyClass,En Horario
-504,Karie,Silva,25000.000000,GU2345F,EconomyClass,En Horario
-505,Martguerita,Martinez,50000.000000,GU2345F,EconomyClass,En Horario
-506,Lothaire,Sepulveda,20000.000000,GU2345F,EconomyClass,En Horario
-507,Patrice,Morales,37000.000000,GU2345F,EconomyClass,En Horario
+422,Jennifer,Orellana,15000.000000,GU2345F,FirstClass,Aterrizado
+423,Keelby,Cardenas,15000.000000,GU2345F,FirstClass,Aterrizado
+424,Chuck,Olivares,33000.000000,GU2345F,FirstClass,Aterrizado
+425,Jordan,Alarcon,33000.000000,GU2345F,FirstClass,Aterrizado
+426,Minnnie,Gallardo,20000.000000,GU2345F,FirstClass,Aterrizado
+427,Carine,Ortiz,33000.000000,GU2345F,FirstClass,Aterrizado
+428,Kelly,Garrido,37000.000000,GU2345F,FirstClass,Aterrizado
+429,Coleman,Salazar,25000.000000,GU2345F,FirstClass,Aterrizado
+430,Pincus,Guzman,42000.000000,GU2345F,FirstClass,Aterrizado
+431,Smitty,Henriquez,15000.000000,GU2345F,FirstClass,Aterrizado
+432,Wade,Saavedra,12000.000000,GU2345F,FirstClass,Aterrizado
+433,Emmit,Navarro,12000.000000,GU2345F,FirstClass,Aterrizado
+434,Brietta,Aguilera,42000.000000,GU2345F,FirstClass,Aterrizado
+435,Wesley,Parra,10000.000000,GU2345F,FirstClass,Aterrizado
+436,Felicdad,Romero,18000.000000,GU2345F,FirstClass,Aterrizado
+437,Any,Aravena,18000.000000,GU2345F,FirstClass,Aterrizado
+438,Gardie,Vargas,12000.000000,GU2345F,FirstClass,Aterrizado
+439,Leelah,Vazquez,25000.000000,GU2345F,FirstClass,Aterrizado
+440,Garold,Caceres,20000.000000,GU2345F,FirstClass,Aterrizado
+441,Regine,Yanez,10000.000000,GU2345F,FirstClass,Aterrizado
+442,Tam,Leiva,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+443,Davon,Escobar,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+444,Chrissy,Ruiz,18000.000000,GU2345F,ExecutiveClass,Aterrizado
+445,Ozzie,Valdes,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+446,Rina,Vidal,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+447,Guy,Salinas,42000.000000,GU2345F,ExecutiveClass,Aterrizado
+448,Lenora,Zuniga,18000.000000,GU2345F,ExecutiveClass,Aterrizado
+449,Julietta,Pena,42000.000000,GU2345F,ExecutiveClass,Aterrizado
+450,Alexandr,Godoy,18000.000000,GU2345F,ExecutiveClass,Aterrizado
+451,Margalit,Lagos,15000.000000,GU2345F,ExecutiveClass,Aterrizado
+452,Samara,Maldonado,50000.000000,GU2345F,ExecutiveClass,Aterrizado
+453,Portie,Bustos,15000.000000,GU2345F,ExecutiveClass,Aterrizado
+454,Korella,Medina,33000.000000,GU2345F,ExecutiveClass,Aterrizado
+455,Hilly,Pino,30000.000000,GU2345F,ExecutiveClass,Aterrizado
+456,Leeanne,Palma,10000.000000,GU2345F,ExecutiveClass,Aterrizado
+457,Arnaldo,Moreno,10000.000000,GU2345F,ExecutiveClass,Aterrizado
+458,Kassi,Sanhueza,37000.000000,GU2345F,ExecutiveClass,Aterrizado
+459,Karen,Carvajal,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+460,Mac,Navarrete,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+461,Anthia,Saez,37000.000000,GU2345F,ExecutiveClass,Aterrizado
+462,Marsiella,Alvarado,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+463,Shea,Donoso,12000.000000,GU2345F,ExecutiveClass,Aterrizado
+464,Liana,Poblete,15000.000000,GU2345F,ExecutiveClass,Aterrizado
+465,Carley,Bustamante,12000.000000,GU2345F,ExecutiveClass,Aterrizado
+466,Carlye,Toro,37000.000000,GU2345F,ExecutiveClass,Aterrizado
+467,Svend,Ortega,25000.000000,GU2345F,ExecutiveClass,Aterrizado
+468,Kendell,Venegas,25000.000000,GU2345F,ExecutiveClass,Aterrizado
+469,Chrisy,Guerrero,15000.000000,GU2345F,ExecutiveClass,Aterrizado
+470,Rod,Mendoza,50000.000000,GU2345F,ExecutiveClass,Aterrizado
+471,Ramsay,Farias,20000.000000,GU2345F,ExecutiveClass,Aterrizado
+472,Saidee,San martin,50000.000000,GU2345F,ExecutiveClass,Aterrizado
+473,Erek,Gonzalez,10000.000000,GU2345F,ExecutiveClass,Aterrizado
+474,Salomi,Fernandez,10000.000000,GU2345F,ExecutiveClass,Aterrizado
+475,Coletta,Rodriguez,50000.000000,GU2345F,ExecutiveClass,Aterrizado
+476,Abigael,Lopez,12000.000000,GU2345F,ExecutiveClass,Aterrizado
+477,Mariele,Martinez,33000.000000,GU2345F,EconomyClass,Aterrizado
+478,Brooke,Sanchez,20000.000000,GU2345F,EconomyClass,Aterrizado
+479,Benita,Perez,25000.000000,GU2345F,EconomyClass,Aterrizado
+480,Marissa,Gomez,37000.000000,GU2345F,EconomyClass,Aterrizado
+481,Lionello,Martin,37000.000000,GU2345F,EconomyClass,Aterrizado
+482,Tori,Jimenez,42000.000000,GU2345F,EconomyClass,Aterrizado
+483,Micheil,Ruiz,37000.000000,GU2345F,EconomyClass,Aterrizado
+484,Kym,Hernandez,20000.000000,GU2345F,EconomyClass,Aterrizado
+485,Melisse,Diaz,10000.000000,GU2345F,EconomyClass,Aterrizado
+486,Bartholomew,Moreno,33000.000000,GU2345F,EconomyClass,Aterrizado
+487,Rorie,Alvarez,25000.000000,GU2345F,EconomyClass,Aterrizado
+488,Hedvige,Munoz,37000.000000,GU2345F,EconomyClass,Aterrizado
+489,Dorothea,Romero,15000.000000,GU2345F,EconomyClass,Aterrizado
+490,Tamarah,Alonso,50000.000000,GU2345F,EconomyClass,Aterrizado
+491,Skipton,Gutierrez,10000.000000,GU2345F,EconomyClass,Aterrizado
+492,Minny,Navarro,33000.000000,GU2345F,EconomyClass,Aterrizado
+493,Joshia,Torres,33000.000000,GU2345F,EconomyClass,Aterrizado
+494,Mirilla,Dominguez,30000.000000,GU2345F,EconomyClass,Aterrizado
+495,Willey,Vazquez,15000.000000,GU2345F,EconomyClass,Aterrizado
+496,Conrado,Ramos,50000.000000,GU2345F,EconomyClass,Aterrizado
+497,Fredia,Gonzalez,30000.000000,GU2345F,EconomyClass,Aterrizado
+498,Gretchen,Munoz,12000.000000,GU2345F,EconomyClass,Aterrizado
+499,Bibbie,Rojas,37000.000000,GU2345F,EconomyClass,Aterrizado
+500,Warren,Diaz,25000.000000,GU2345F,EconomyClass,Aterrizado
+501,Gabi,Perez,30000.000000,GU2345F,EconomyClass,Aterrizado
+502,Callie,Soto,50000.000000,GU2345F,EconomyClass,Aterrizado
+503,Patton,Contreras,15000.000000,GU2345F,EconomyClass,Aterrizado
+504,Karie,Silva,25000.000000,GU2345F,EconomyClass,Aterrizado
+505,Martguerita,Martinez,50000.000000,GU2345F,EconomyClass,Aterrizado
+506,Lothaire,Sepulveda,20000.000000,GU2345F,EconomyClass,Aterrizado
+507,Patrice,Morales,37000.000000,GU2345F,EconomyClass,Aterrizado
 508,Lin,Rodriguez,12000.000000,MM0987B,EconomyClass,En Horario
 509,Cornie,Lopez,42000.000000,MM0987B,EconomyClass,En Horario
 510,Irena,Fuentes,20000.000000,MM0987B,EconomyClass,En Horario
@@ -513,66 +513,66 @@ id,name,lastname,price,flycode,typePassenger,statusFlight
 512,Bird,Torres,18000.000000,MM0987B,EconomyClass,En Horario
 513,Lorna,Araya,42000.000000,MM0987B,EconomyClass,En Horario
 514,Vincents,Flores,25000.000000,MM0987B,EconomyClass,En Horario
-515,Torrey,Espinoza,42000.000000,GU2345F,EconomyClass,En Horario
-516,Pernell,Valenzuela,50000.000000,GU2345F,EconomyClass,En Horario
-517,Danya,Castillo,25000.000000,GU2345F,EconomyClass,En Horario
-518,Erda,Tapia,37000.000000,GU2345F,EconomyClass,En Horario
-519,Ethe,Reyes,20000.000000,GU2345F,EconomyClass,En Horario
-520,Coop,Gutierrez,37000.000000,GU2345F,EconomyClass,En Horario
-521,Sheridan,Castro,50000.000000,GU2345F,EconomyClass,En Horario
-522,Charles,Pizarro,42000.000000,GU2345F,EconomyClass,En Horario
-523,Eddy,Alvarez,12000.000000,GU2345F,EconomyClass,En Horario
-524,Janey,Vasquez,42000.000000,GU2345F,EconomyClass,En Horario
-525,Edan,Sanchez,20000.000000,GU2345F,EconomyClass,En Horario
-526,Homer,Fernandez,10000.000000,GU2345F,EconomyClass,En Horario
-527,Eveline,Ramirez,37000.000000,GU2345F,EconomyClass,En Horario
-528,Helen elizabeth,Carrasco,20000.000000,GU2345F,EconomyClass,En Horario
-529,Daveta,Gomez,20000.000000,GU2345F,EconomyClass,En Horario
-530,Mort,Cortes,42000.000000,GU2345F,EconomyClass,En Horario
-531,Maxi,Herrera,37000.000000,GU2345F,EconomyClass,En Horario
-532,Nathalie,Nunez,37000.000000,GU2345F,EconomyClass,En Horario
-533,Dennison,Jara,25000.000000,GU2345F,EconomyClass,En Horario
-534,Bunnie,Vergara,33000.000000,GU2345F,EconomyClass,En Horario
+515,Torrey,Espinoza,42000.000000,GU2345F,EconomyClass,Aterrizado
+516,Pernell,Valenzuela,50000.000000,GU2345F,EconomyClass,Aterrizado
+517,Danya,Castillo,25000.000000,GU2345F,EconomyClass,Aterrizado
+518,Erda,Tapia,37000.000000,GU2345F,EconomyClass,Aterrizado
+519,Ethe,Reyes,20000.000000,GU2345F,EconomyClass,Aterrizado
+520,Coop,Gutierrez,37000.000000,GU2345F,EconomyClass,Aterrizado
+521,Sheridan,Castro,50000.000000,GU2345F,EconomyClass,Aterrizado
+522,Charles,Pizarro,42000.000000,GU2345F,EconomyClass,Aterrizado
+523,Eddy,Alvarez,12000.000000,GU2345F,EconomyClass,Aterrizado
+524,Janey,Vasquez,42000.000000,GU2345F,EconomyClass,Aterrizado
+525,Edan,Sanchez,20000.000000,GU2345F,EconomyClass,Aterrizado
+526,Homer,Fernandez,10000.000000,GU2345F,EconomyClass,Aterrizado
+527,Eveline,Ramirez,37000.000000,GU2345F,EconomyClass,Aterrizado
+528,Helen elizabeth,Carrasco,20000.000000,GU2345F,EconomyClass,Aterrizado
+529,Daveta,Gomez,20000.000000,GU2345F,EconomyClass,Aterrizado
+530,Mort,Cortes,42000.000000,GU2345F,EconomyClass,Aterrizado
+531,Maxi,Herrera,37000.000000,GU2345F,EconomyClass,Aterrizado
+532,Nathalie,Nunez,37000.000000,GU2345F,EconomyClass,Aterrizado
+533,Dennison,Jara,25000.000000,GU2345F,EconomyClass,Aterrizado
+534,Bunnie,Vergara,33000.000000,GU2345F,EconomyClass,Aterrizado
 535,Frans,Rivera,33000.000000,BA2491A,EconomyClass,Aterrizado
 536,Delmar,Figueroa,42000.000000,BA2491A,EconomyClass,Aterrizado
 537,Ced,Riquelme,20000.000000,BA2491A,EconomyClass,Aterrizado
 538,Caren,Garcia,12000.000000,BA2491A,EconomyClass,Aterrizado
 539,Christie,Miranda,18000.000000,BA2491A,EconomyClass,Aterrizado
 540,Saunders,Bravo,25000.000000,BA2491A,EconomyClass,Aterrizado
-541,Deny,Vera,18000.000000,GU2345F,EconomyClass,En Horario
-542,Gene,Molina,15000.000000,GU2345F,EconomyClass,En Horario
-543,Margeaux,Vega,18000.000000,GU2345F,EconomyClass,En Horario
-544,Prisca,Campos,18000.000000,GU2345F,EconomyClass,En Horario
-545,Domini,Sandoval,18000.000000,GU2345F,EconomyClass,En Horario
-546,Henrie,Orellana,50000.000000,GU2345F,EconomyClass,En Horario
-547,Marj,Cardenas,18000.000000,GU2345F,EconomyClass,En Horario
-548,Mab,Olivares,25000.000000,GU2345F,EconomyClass,En Horario
-549,Josiah,Alarcon,12000.000000,GU2345F,EconomyClass,En Horario
-550,Mathe,Gallardo,12000.000000,GU2345F,EconomyClass,En Horario
-551,Gauthier,Ortiz,12000.000000,GU2345F,EconomyClass,En Horario
-552,Delmore,Garrido,33000.000000,GU2345F,EconomyClass,En Horario
-553,Lynett,Salazar,37000.000000,GU2345F,EconomyClass,En Horario
-554,Lucais,Guzman,42000.000000,GU2345F,EconomyClass,En Horario
-555,Clarice,Henriquez,33000.000000,GU2345F,EconomyClass,En Horario
-556,Aeriela,Saavedra,37000.000000,GU2345F,EconomyClass,En Horario
-557,Babbie,Navarro,15000.000000,GU2345F,EconomyClass,En Horario
-558,Caren,Aguilera,15000.000000,GU2345F,EconomyClass,En Horario
-559,Jessamine,Parra,18000.000000,GU2345F,EconomyClass,En Horario
-560,Hesther,Romero,15000.000000,GU2345F,EconomyClass,En Horario
-561,Sasha,Aravena,15000.000000,GU2345F,EconomyClass,En Horario
-562,Erica,Vargas,10000.000000,GU2345F,EconomyClass,En Horario
-563,Keith,Vazquez,10000.000000,GU2345F,EconomyClass,En Horario
-564,Briney,Caceres,12000.000000,GU2345F,EconomyClass,En Horario
-565,Rutherford,Yanez,15000.000000,GU2345F,EconomyClass,En Horario
-566,Lemmie,Leiva,18000.000000,GU2345F,EconomyClass,En Horario
-567,Dur,Escobar,25000.000000,GU2345F,EconomyClass,En Horario
-568,Modesta,Ruiz,33000.000000,GU2345F,EconomyClass,En Horario
-569,Carter,Valdes,33000.000000,GU2345F,EconomyClass,En Horario
-570,Retha,Vidal,15000.000000,GU2345F,EconomyClass,En Horario
-571,Carma,Salinas,33000.000000,GU2345F,EconomyClass,En Horario
-572,Antonella,Zuniga,15000.000000,GU2345F,EconomyClass,En Horario
-573,Sutherlan,Pena,10000.000000,GU2345F,EconomyClass,En Horario
-574,Phillipe,Godoy,37000.000000,GU2345F,EconomyClass,En Horario
+541,Deny,Vera,18000.000000,GU2345F,EconomyClass,Aterrizado
+542,Gene,Molina,15000.000000,GU2345F,EconomyClass,Aterrizado
+543,Margeaux,Vega,18000.000000,GU2345F,EconomyClass,Aterrizado
+544,Prisca,Campos,18000.000000,GU2345F,EconomyClass,Aterrizado
+545,Domini,Sandoval,18000.000000,GU2345F,EconomyClass,Aterrizado
+546,Henrie,Orellana,50000.000000,GU2345F,EconomyClass,Aterrizado
+547,Marj,Cardenas,18000.000000,GU2345F,EconomyClass,Aterrizado
+548,Mab,Olivares,25000.000000,GU2345F,EconomyClass,Aterrizado
+549,Josiah,Alarcon,12000.000000,GU2345F,EconomyClass,Aterrizado
+550,Mathe,Gallardo,12000.000000,GU2345F,EconomyClass,Aterrizado
+551,Gauthier,Ortiz,12000.000000,GU2345F,EconomyClass,Aterrizado
+552,Delmore,Garrido,33000.000000,GU2345F,EconomyClass,Aterrizado
+553,Lynett,Salazar,37000.000000,GU2345F,EconomyClass,Aterrizado
+554,Lucais,Guzman,42000.000000,GU2345F,EconomyClass,Aterrizado
+555,Clarice,Henriquez,33000.000000,GU2345F,EconomyClass,Aterrizado
+556,Aeriela,Saavedra,37000.000000,GU2345F,EconomyClass,Aterrizado
+557,Babbie,Navarro,15000.000000,GU2345F,EconomyClass,Aterrizado
+558,Caren,Aguilera,15000.000000,GU2345F,EconomyClass,Aterrizado
+559,Jessamine,Parra,18000.000000,GU2345F,EconomyClass,Aterrizado
+560,Hesther,Romero,15000.000000,GU2345F,EconomyClass,Aterrizado
+561,Sasha,Aravena,15000.000000,GU2345F,EconomyClass,Aterrizado
+562,Erica,Vargas,10000.000000,GU2345F,EconomyClass,Aterrizado
+563,Keith,Vazquez,10000.000000,GU2345F,EconomyClass,Aterrizado
+564,Briney,Caceres,12000.000000,GU2345F,EconomyClass,Aterrizado
+565,Rutherford,Yanez,15000.000000,GU2345F,EconomyClass,Aterrizado
+566,Lemmie,Leiva,18000.000000,GU2345F,EconomyClass,Aterrizado
+567,Dur,Escobar,25000.000000,GU2345F,EconomyClass,Aterrizado
+568,Modesta,Ruiz,33000.000000,GU2345F,EconomyClass,Aterrizado
+569,Carter,Valdes,33000.000000,GU2345F,EconomyClass,Aterrizado
+570,Retha,Vidal,15000.000000,GU2345F,EconomyClass,Aterrizado
+571,Carma,Salinas,33000.000000,GU2345F,EconomyClass,Aterrizado
+572,Antonella,Zuniga,15000.000000,GU2345F,EconomyClass,Aterrizado
+573,Sutherlan,Pena,10000.000000,GU2345F,EconomyClass,Aterrizado
+574,Phillipe,Godoy,37000.000000,GU2345F,EconomyClass,Aterrizado
 575,Florida,Lagos,37000.000000,HY4567D,FirstClass,Demorado
 576,Corrina,Maldonado,15000.000000,HY4567D,FirstClass,Demorado
 577,Adrianne,Bustos,10000.000000,HY4567D,FirstClass,Demorado
@@ -998,4 +998,4 @@ id,name,lastname,price,flycode,typePassenger,statusFlight
 997,De witt,Alonso,12000.000000,MM0987B,EconomyClass,En Horario
 998,Jaye,Gutierrez,25000.000000,MM0987B,EconomyClass,En Horario
 999,Tamarra,Navarro,15000.000000,MM0987B,EconomyClass,En Horario
-1000,Pablo,Cugliari,20000.000000,MM0987B,EconomyClass,En Horario
+1000,Saleem,Torres,20000.000000,MM0987B,EconomyClass,En Horario

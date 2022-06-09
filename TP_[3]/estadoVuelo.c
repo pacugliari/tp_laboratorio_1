@@ -10,29 +10,107 @@
 #include "stdio.h"
 #include <string.h>
 
-int hardcodearEstadosVuelo(eEstadoVuelo* vector,int tam){
+
+eEstadoVuelo* EstadoVuelo_new(){
+	eEstadoVuelo* nuevoEstado = (eEstadoVuelo*) calloc(1,sizeof(eEstadoVuelo));
+    return nuevoEstado;
+}
+
+
+eEstadoVuelo* EstadoVuelo_newParametros(int id,char* descripcion){
+	eEstadoVuelo* nuevoEstado = EstadoVuelo_new();
+    if(nuevoEstado && descripcion ){
+        if(!(EstadoVuelo_setId(nuevoEstado,id) && EstadoVuelo_setDescripcion(nuevoEstado,descripcion))){
+        	EstadoVuelo_delete(nuevoEstado);
+        	nuevoEstado = NULL;
+           }
+    }
+    return nuevoEstado;
+}
+
+LinkedList* EstadosVuelos_newLista (){
+	LinkedList* todoOk = ll_newLinkedList();
+	eEstadoVuelo* estadoActual;
+
+	if(todoOk){
+		estadoActual = EstadoVuelo_newParametros(20000,"Aterrizado");
+		if(estadoActual)
+			ll_add(todoOk,estadoActual);
+		estadoActual = EstadoVuelo_newParametros(20001,"En Horario");
+		if(estadoActual)
+			ll_add(todoOk,estadoActual);
+		estadoActual = EstadoVuelo_newParametros(20002,"Demorado");
+		if(estadoActual)
+			ll_add(todoOk,estadoActual);
+	}
+
+	return todoOk;
+}
+
+int EstadosVuelos_deleteLista(LinkedList* lista){
 	int todoOk = 0;
-	if(vector && tam >0 && tam <= 3){
-		eEstadoVuelo estadosV [3] = {{20000,"Aterrizado"},
-		                                  {20001,"En Horario"},
-		                                  {20002,"Demorado"}};
-		for(int i=0;i<tam;i++){
-			vector[i].id = estadosV[i].id;
-			strcpy(vector[i].descripcion,estadosV[i].descripcion);
+	eEstadoVuelo* estadoActual;
+	if(lista){
+		for(int i=0;i<ll_len(lista);i++){
+			estadoActual = (eEstadoVuelo*) ll_get(lista,i);
+			EstadoVuelo_delete(estadoActual);
 		}
+		ll_deleteLinkedList(lista);
 		todoOk = 1;
 	}
 	return todoOk;
-
 }
 
-int buscarEstadoVueloPorDescripcion (eEstadoVuelo estadoV[],int tamEstadoV,char* descripcion,int* pIndice){
+void EstadoVuelo_delete(eEstadoVuelo* estadoVuelo){
+	free(estadoVuelo);
+}
+
+int EstadoVuelo_setId(eEstadoVuelo* this,int id){
     int todoOk = 0;
-    if(estadoV && tamEstadoV >0 && pIndice){
-        *pIndice = -1;
-        for(int i=0;i<tamEstadoV;i++){
-            if(!strcmp(estadoV[i].descripcion,descripcion)){
-                *pIndice = i;
+    if(this && id >= 20000 && id <= 29999 ){ //VALIDACION DE ID
+    	this->id = id;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+int EstadoVuelo_getId(eEstadoVuelo* this,int* id){
+    int todoOk = 0;
+    if(this && id){
+        (*id) = this->id;
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int EstadoVuelo_setDescripcion(eEstadoVuelo* this,char* descripcion){
+    int todoOk = 0;
+    if(this && descripcion && strlen(descripcion) > 0 && strlen(descripcion) < 25){
+        strcpy(this->descripcion,descripcion);
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+int EstadoVuelo_getDescripcion(eEstadoVuelo* this,char* descripcion){
+    int todoOk = 0;
+    if(this && descripcion){
+        strcpy(descripcion,this->descripcion);
+        todoOk = 1;
+    }
+    return todoOk;
+}
+
+
+int buscarEstadoVueloPorDescripcion (LinkedList* lista,char* descripcion,int* indice){
+    int todoOk = 0;
+    eEstadoVuelo* estadoActual;
+
+    if(lista && indice){
+    	(*indice)= -1;
+        for(int i=0;i<ll_len(lista);i++){
+        	estadoActual = (eEstadoVuelo*) ll_get(lista,i);
+            if(!strcmp(estadoActual->descripcion,descripcion)){
+                (*indice) = i;
                 break;
             }
         }
@@ -41,13 +119,16 @@ int buscarEstadoVueloPorDescripcion (eEstadoVuelo estadoV[],int tamEstadoV,char*
     return todoOk;
 }
 
-int buscarEstadoVueloPorId (eEstadoVuelo estadoV[],int tamEstadoV,int id,int* pIndice){
+int buscarEstadoVueloPorId (LinkedList* lista,int id,int* indice){
     int todoOk = 0;
-    if(estadoV && tamEstadoV >0 && pIndice){
-        *pIndice = -1;
-        for(int i=0;i<tamEstadoV;i++){
-            if(estadoV[i].id == id){
-                *pIndice = i;
+    eEstadoVuelo* estadoActual;
+
+    if(lista && indice){
+    	(*indice) = -1;
+        for(int i=0;i<ll_len(lista);i++){
+        	estadoActual = (eEstadoVuelo*) ll_get(lista,i);
+            if(estadoActual->id == id){
+                (*indice) = i;
                 break;
             }
         }
@@ -56,28 +137,33 @@ int buscarEstadoVueloPorId (eEstadoVuelo estadoV[],int tamEstadoV,int id,int* pI
     return todoOk;
 }
 
-int cargarDescripcionEstadoVuelo (eEstadoVuelo estadoV[],int tamE,int id,char descripcion[]){
+int cargarDescripcionEstadoVuelo (LinkedList* lista,int id,char descripcion[]){
     int todoOk = 0;
     int indice;
-    if(estadoV && tamE >0 && descripcion && buscarEstadoVueloPorId(estadoV,tamE,id,&indice)){
-        strcpy(descripcion,estadoV[indice].descripcion);
+    eEstadoVuelo* estadoActual;
+
+    if(lista && descripcion && buscarEstadoVueloPorId(lista,id,&indice)){
+    	estadoActual = (eEstadoVuelo*) ll_get(lista,indice);
+        strcpy(descripcion,estadoActual->descripcion);
         todoOk = 1;
     }
     return todoOk;
 }
 
 
-int listarEstadosVuelos (eEstadoVuelo estadosV[],int tamE){
+int listarEstadosVuelos (LinkedList* lista){
     int todoOk = 0;
+    eEstadoVuelo* estadoActual;
 
-    if(estadosV && tamE>0){
+    if(lista){
         system("cls");
         printf("  ***LISTADO DE ESTADOS DE VUELOS***\n");
         printf("-------------------------------\n");
         printf("ID\tEstado de vuelo\n");
         printf("-------------------------------\n");
-        for(int i=0;i<tamE;i++){
-            printf("%d\t%-10s\n",estadosV[i].id,estadosV[i].descripcion);
+        for(int i=0;i<ll_len(lista);i++){
+        	estadoActual = (eEstadoVuelo*) ll_get(lista,i);
+            printf("%d\t%-10s\n",estadoActual->id,estadoActual->descripcion);
         }
         printf("-------------------------------\n\n");
         todoOk= 1;
@@ -87,14 +173,11 @@ int listarEstadosVuelos (eEstadoVuelo estadosV[],int tamE){
 }
 
 
-
-
-
-int validarEstadoVuelo (eEstadoVuelo estadosV[],int tamE,int id){
+int validarEstadoVuelo (LinkedList* lista,int id){
     int todoOk = 0;
     int indice;
-    if(estadosV && tamE > 0){
-    	buscarEstadoVueloPorId (estadosV,tamE,id,&indice);
+    if(lista){
+    	buscarEstadoVueloPorId (lista,id,&indice);
         if(indice != -1)
             todoOk = 1;
     }
@@ -102,17 +185,17 @@ int validarEstadoVuelo (eEstadoVuelo estadosV[],int tamE,int id){
 }
 
 
-int pedirEstadoVuelo (eEstadoVuelo estadosV[],int tamE,int* idEstadoV){
+int pedirEstadoVuelo (LinkedList* lista,int* id){
     int todoOk=0;
-    if(estadosV && tamE >0 && idEstadoV){
-    	listarEstadosVuelos(estadosV,tamE);
+    if(lista && id){
+    	listarEstadosVuelos(lista);
         printf("Ingrese el ID del estado de vuelo \n");
-        scanf("%d",idEstadoV);
+        scanf("%d",id);
         fflush(stdin);
 
-        while(!validarEstadoVuelo(estadosV,tamE,*idEstadoV)){
+        while(!validarEstadoVuelo(lista,*id)){
             printf("Error en la ID del estado de vuelo.Vuelva a ingresar \n");
-            scanf("%d",idEstadoV);
+            scanf("%d",id);
             fflush(stdin);
         }
         todoOk = 1;

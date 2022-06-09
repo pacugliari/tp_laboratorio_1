@@ -44,14 +44,14 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* 
     int indiceTipoPasajero;
     int indiceEstadoVuelo;
     char encabezados[7][20];
-    eTipoPasajero tiposP [TAMTP];
-    eEstadoVuelo estadosV [TAMEV];
+    LinkedList* tiposPasajeros = TiposPasajeros_newLista();
+    LinkedList* estadosVuelos = EstadosVuelos_newLista();
+    eEstadoVuelo* auxEstado;
+    eTipoPasajero* auxTipo;
+
     Passenger* pasajeroNuevo = NULL;
     int mayorId;
     int esPrimero = 1;
-
-    hardcodearTiposPasajeros(tiposP,TAMTP);
-    hardcodearEstadosVuelo(estadosV,TAMEV);
 
     //FORMATO id,name,lastname,price,flycode,typePassenger,statusFlight
     fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",encabezados[0],encabezados[1],encabezados[2],encabezados[3],encabezados[4],
@@ -60,11 +60,14 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* 
 	do{
 		datosLeidos = fscanf(pFile,"%[^,],%[^,],%[^,],%[^,],%[^,],%[^,],%[^\n]\n",buffer[0],buffer[1],buffer[2],buffer[3],
 				buffer[4],buffer[5],buffer[6]);
-		if(datosLeidos==7 && esCadenaValida(buffer[1]) && esCadenaValida(buffer[2])){
-			buscarTipoPasajeroPorDescripcion(tiposP,TAMTP,buffer[5],&indiceTipoPasajero);
-			buscarEstadoVueloPorDescripcion(estadosV,TAMEV,buffer[6],&indiceEstadoVuelo);
-			pasajeroNuevo = Passenger_newParametros(atoi(buffer[0]),buffer[1],buffer[2],atof(buffer[3]),buffer[4],tiposP[indiceTipoPasajero].id,
-					estadosV[indiceEstadoVuelo].id);
+		buscarTipoPasajeroPorDescripcion(tiposPasajeros,buffer[5],&indiceTipoPasajero);
+		buscarEstadoVueloPorDescripcion(estadosVuelos,buffer[6],&indiceEstadoVuelo);
+
+		if(datosLeidos==7 && esCadenaValida(buffer[1]) && esCadenaValida(buffer[2]) && indiceEstadoVuelo != -1 && indiceTipoPasajero != -1){
+			auxEstado = (eEstadoVuelo*) ll_get(estadosVuelos,indiceEstadoVuelo);
+			auxTipo = (eTipoPasajero*) ll_get(tiposPasajeros,indiceEstadoVuelo);
+
+			pasajeroNuevo = Passenger_newParametros(atoi(buffer[0]),buffer[1],buffer[2],atof(buffer[3]),buffer[4],auxTipo->id,auxEstado->id);
 			if(pasajeroNuevo){
 				if(pasajeroNuevo->id > mayorId || esPrimero){
 					mayorId = pasajeroNuevo->id;
@@ -77,6 +80,9 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* 
 	}while(!feof(pFile));
 
 	(*pId) = mayorId +1;
+
+	TiposPasajeros_deleteLista(tiposPasajeros);
+	EstadosVuelos_deleteLista(estadosVuelos);
 	return datosCargados;
 }
 
