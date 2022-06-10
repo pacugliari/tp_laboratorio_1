@@ -124,11 +124,11 @@ int buscarTipoPasajeroPorId (LinkedList* lista,int id,int* pIndice){
     eTipoPasajero* tipoActual;
 
     if(lista && pIndice){
-        *pIndice = -1;
+    	(*pIndice) = -1;
         for(int i=0;i<ll_len(lista);i++){
         	tipoActual = (eTipoPasajero*) ll_get(lista,i);
             if(tipoActual->id == id){
-                *pIndice = i;
+                (*pIndice) = i;
                 break;
             }
         }
@@ -143,6 +143,7 @@ int listarTiposPasajeros (LinkedList* lista){
 
     if(lista){
         system("cls");
+        printf("\n-------------------------------\n");
         printf("  ***LISTADO DE TIPOS DE PASAJEROS***\n");
         printf("-------------------------------\n");
         printf("ID\tTipo de pasajero\n");

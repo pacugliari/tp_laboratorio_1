@@ -9,6 +9,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "LinkedList.h"
+#include "tipoPasajero.h"
+#include "estadoVuelo.h"
 
 Passenger* Passenger_new(){
 	Passenger* nuevoPasajero = (Passenger*) calloc(1,sizeof(Passenger));
@@ -176,3 +179,126 @@ int Passenger_getStatusFlight(Passenger* this,int* idEstadoVuelo){
     }
     return todoOk;
 }
+
+int pasajeroComparaId (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+
+    if(a && b){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        if(x->id > y->id){
+            retorno = 1;
+        }else if (x->id < y->id){
+            retorno = -1;
+        }
+    }
+    return retorno;
+}
+
+int pasajeroComparaNombre (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+
+    if(a && b){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        retorno = strcmp(x->nombre,y->nombre);
+    }
+    return retorno;
+}
+
+int pasajeroComparaApellido (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+
+    if(a && b){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        retorno = strcmp(x->apellido,y->apellido);
+    }
+    return retorno;
+}
+
+int pasajeroComparaPrecio (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+
+    if(a && b){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        if(x->precio > y->precio){
+            retorno = 1;
+        }else if (x->precio < y->precio){
+            retorno = -1;
+        }
+    }
+    return retorno;
+}
+
+
+int pasajeroComparaCodigoVuelo (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+
+    if(a && b){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        retorno = strcmp(x->codigoVuelo,y->codigoVuelo);
+    }
+    return retorno;
+}
+
+int pasajeroComparaTipoPasajero (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+    char descripcionTipo1 [20];
+    char descripcionTipo2 [20];
+    LinkedList* tiposPasajeros = TiposPasajeros_newLista();
+
+
+    if(a && b && tiposPasajeros){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+
+        cargarDescripcionTipoPasajero (tiposPasajeros,x->idTipoPasajero,descripcionTipo1);
+        cargarDescripcionTipoPasajero (tiposPasajeros,y->idTipoPasajero,descripcionTipo2);
+
+        retorno = strcmp(descripcionTipo1,descripcionTipo2);
+        TiposPasajeros_deleteLista(tiposPasajeros);
+    }
+
+    return retorno;
+}
+
+int pasajeroComparaEstadoVuelo (void* a,void* b){
+    int retorno = 0;
+    Passenger* x;
+    Passenger* y;
+    char descripcionEstado1 [20];
+    char descripcionEstado2 [20];
+    LinkedList* estadosVuelos = EstadosVuelos_newLista();
+
+    if(a && b && estadosVuelos){
+        x = (Passenger*)a;
+        y = (Passenger*)b;
+        cargarDescripcionEstadoVuelo (estadosVuelos,x->idEstadoVuelo,descripcionEstado1);
+        cargarDescripcionEstadoVuelo (estadosVuelos,y->idEstadoVuelo,descripcionEstado2);
+        retorno = strcmp(descripcionEstado1,descripcionEstado2);
+        EstadosVuelos_deleteLista(estadosVuelos);
+    }
+    return retorno;
+}
+
+

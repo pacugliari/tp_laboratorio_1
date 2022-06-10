@@ -15,26 +15,53 @@ int pedirMenuModificar(){
 	printf("5) Codigo de vuelo \n");
 	printf("6) Estado de vuelo \n");
 	printf("7) Salir \n");
+	printf("Ingrese opcion: ");
 	scanf("%d",&respuesta);
 	fflush(stdin);
 	printf("\n");
 	return respuesta;
 }
 
+int pedirMenuOrdenar(){
+	int respuesta;
+	printf("\n1) Ordenar por Id \n");
+	printf("2) Ordenar por Nombre \n");
+	printf("3) Ordenar por Apellido \n");
+	printf("4) Ordenar por Precio \n");
+	printf("5) Ordenar por Tipo de pasajero \n");
+	printf("6) Ordenar por Codigo de vuelo \n");
+	printf("7) Ordenar por Estado de vuelo \n");
+	printf("8) Salir \n");
+	printf("Ingrese opcion: ");
+	scanf("%d",&respuesta);
+	fflush(stdin);
+	return respuesta;
+}
+
+int pedirMenuOrdenarTipo(){
+	int respuesta;
+	printf("0) Ordenar Descendente \n");
+	printf("1) Ordenar Ascendente \n");
+	printf("2) Salir \n");
+	printf("Ingrese opcion: ");
+	scanf("%d",&respuesta);
+	fflush(stdin);
+	return respuesta;
+}
+
 char pedirConfirmacion (Passenger pasajero,int tipo,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos){
 	char respuesta = 'n';
 	if(listaTiposPasajeros && listaEstadosVuelos){
-		if(tipo==MODIFICAR){
-			printf("Desea modificar el siguiente pasajero ? s-n \n\n");
-		}else
-			printf("Desea borrar el siguiente pasajero ? s-n \n\n");
-
-		printf("ID\t\tNombre\t\tApellido\t\t    Precio\t\tTipo de Pasajero\t\tCodigo de vuelo\t\tEstado de vuelo\n");
+		printf("\nID\t\tNombre\t\tApellido\t\t    Precio\t\tTipo de Pasajero\t\tCodigo de vuelo\t\tEstado de vuelo\n");
 		printf("-------------------------------------------------------------------------------------------------------------------------------"
 				"------------------------\n");
 		printPassengerData(pasajero,listaTiposPasajeros,listaEstadosVuelos);
 		printf("-------------------------------------------------------------------------------------------------------------------------------"
 				"------------------------\n");
+		if(tipo==MODIFICAR){
+			printf("Desea modificar el pasajero mostrado? s-n: ");
+		}else
+			printf("Desea borrar el pasajero mostrado? s-n: ");
 		fflush(stdin);
 		scanf("%c",&respuesta);
 		respuesta = tolower(respuesta);
@@ -77,7 +104,7 @@ void pedirPrecio (float* precio){
 		printf("Ingrese el precio del vuelo $: ");
 		scanf("%f",precio);
 		fflush(stdin);
-		while(*precio < 0){
+		while(*precio < 0 || *precio > 1000000){
 			printf("Error en precio, ingrese un precio positivo $: ");
 			scanf("%f",precio);
 		}
@@ -123,10 +150,65 @@ int pedirDatosAlta (Passenger* pasajero,LinkedList* listaTiposPasajeros,LinkedLi
 
 int pedirId(){
 	int id;
-	printf("Ingrese el ID \n");
+	printf("Ingrese el ID: ");
 	fflush(stdin);
 	scanf(" %d",&id);
 	fflush(stdin);
 	return id;
+}
+
+int pedirPath(char* path){
+	int todoOk = 0;
+	char pathAux [30];
+	if(path){
+		 path[0]='\0';
+		 strcat(path,"TP_[3]/");
+		 printf("Ingrese el Path: ");
+		 fflush(stdin);
+		 gets(pathAux);
+		 fflush(stdin);
+		 while(strlen(pathAux) <= 0 || strlen(pathAux) >= 20){
+			 printf("Ingrese un Path mas corto/largo: ");
+			 fflush(stdin);
+			 gets(pathAux);
+			 fflush(stdin);
+		 }
+		 strcat(path,pathAux);
+		 todoOk = 1;
+	}
+
+	 return todoOk;
+}
+
+int pedirMenu(){
+    int respuesta;
+
+	printf("\t\t\t\t\t\t***Trabajo Practico numero 3***\n");
+	printf("\t\t\t\t\t\t  Programacion I- Laboratorio I\n");
+	printf("\t\t\t\t\t  Tecnicatura Superior en Programacion UTN-FRA \n");
+	printf("Alumno: Pablo Cugliari | Division: 1A \n");
+	printf("-------------------------------------------------------------------------------------------------------------------------------"
+			"------------------------\n");
+    printf("Menu: \n");
+    printf("\t1. Cargar los datos de los pasajeros desde el archivo data.csv (modo texto).\n");
+    printf("\t2. Cargar los datos de los pasajeros desde el archivo data.csv (modo binario).\n");
+    printf("\t3. Alta de pasajero\n");
+    printf("\t4. Modificar datos de pasajero\n");
+    printf("\t5. Baja de pasajero\n");
+    printf("\t6. Listar pasajeros\n");
+    printf("\t7. Ordenar pasajeros\n");
+    printf("\t8. Guardar los datos de los pasajeros en el archivo data.csv (modo texto).\n");
+    printf("\t9. Guardar los datos de los pasajeros en el archivo data.csv (modo binario).\n");
+    printf("\t10. Salir \n\n");
+	printf("-------------------------------------------------------------------------------------------------------------------------------"
+			"------------------------\n");
+	printf("Ingrese opcion: ");
+
+    scanf("%d",&respuesta);
+    fflush(stdin);
+
+
+    return respuesta;
+
 }
 

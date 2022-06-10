@@ -41,7 +41,8 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger,int* pI
 				contador = parser_PassengerFromText(arch,pArrayListPassenger,pId);
 				printf("Cantidad de pasajeros cargados desde el archivo de texto: %s es: %d \n",path,contador);
 				todoOk=1;
-			}
+			}else
+				printf("Se canselo la carga de datos desde el archivo de texto \n");
 
 		}
 	}
@@ -80,7 +81,8 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger,int* 
 				contador = parser_PassengerFromBinary(arch,pArrayListPassenger,pId);
 				printf("Cantidad de pasajeros cargados desde el archivo binario: %s es: %d \n",path,contador);
 				todoOk=1;
-			}
+			}else
+				printf("Se canselo la carga de datos desde el archivo binario \n");
 
 		}
 	}
@@ -110,7 +112,8 @@ int controller_addPassenger(LinkedList* pArrayListPassenger,int* pId,LinkedList*
 			(*pId)++;
 			todoOk = 1;
 			printf("Pasajero dado de alta de manera exitosa \n");
-		}
+		}else
+			printf("Error en en alta del pasajero \n");
 	}else
 		printf("Error en los parametros de controller_addPassenger \n");
 
@@ -152,45 +155,48 @@ int controller_editPassenger(LinkedList* pArrayListPassenger,LinkedList* tiposPa
 
 
     if(pArrayListPassenger){
-    	id = pedirId();
-    	buscarPasajeroPorId(pArrayListPassenger,&indice,id);
-		if(indice != -1){
-			pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,indice);
-    		respuesta = pedirConfirmacion (*pasajeroActual,2,tiposPasajeros,estadosVuelos);
-			if(respuesta == 's'){
-				do{
-					switch(respuestaMenu = pedirMenuModificar()){
-						case 1:
-							pedirNombre(pasajeroActual->nombre);
-							printf("Se modifico el nombre de manera exitosa \n");
-						break;
-						case 2:
-							pedirApellido(pasajeroActual->apellido);
-							printf("Se modifico el apellido de manera exitosa \n");
-						break;
-						case 3:
-							pedirPrecio(&pasajeroActual->precio);
-							printf("Se modifico el precio de manera exitosa \n");
-						break;
-						case 4:
-							pedirTipoPasajero(tiposPasajeros,&pasajeroActual->idTipoPasajero);
-							printf("Se modifico el tipo de pasajero de manera exitosa \n");
-						break;
-						case 5:
-							pedirCodigoVuelo(pasajeroActual->codigoVuelo);
-							printf("Se modifico el codigo de vuelo de manera exitosa \n");
-						break;
-						case 6:
-							pedirEstadoVuelo(estadosVuelos,&pasajeroActual->idEstadoVuelo);
-							printf("Se modifico el estado de vuelo de manera exitosa \n");
-						break;
-					}
-				}while(respuestaMenu != 7);
-				todoOk = 1;
+    	if(ll_len(pArrayListPassenger) > 0){
+    		id = pedirId();
+			buscarPasajeroPorId(pArrayListPassenger,&indice,id);
+			if(indice != -1){
+				pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,indice);
+				respuesta = pedirConfirmacion (*pasajeroActual,MODIFICAR,tiposPasajeros,estadosVuelos);
+				if(respuesta == 's'){
+					do{
+						switch(respuestaMenu = pedirMenuModificar()){
+							case 1:
+								pedirNombre(pasajeroActual->nombre);
+								printf("Se modifico el nombre de manera exitosa \n");
+							break;
+							case 2:
+								pedirApellido(pasajeroActual->apellido);
+								printf("Se modifico el apellido de manera exitosa \n");
+							break;
+							case 3:
+								pedirPrecio(&pasajeroActual->precio);
+								printf("Se modifico el precio de manera exitosa \n");
+							break;
+							case 4:
+								pedirTipoPasajero(tiposPasajeros,&pasajeroActual->idTipoPasajero);
+								printf("Se modifico el tipo de pasajero de manera exitosa \n");
+							break;
+							case 5:
+								pedirCodigoVuelo(pasajeroActual->codigoVuelo);
+								printf("Se modifico el codigo de vuelo de manera exitosa \n");
+							break;
+							case 6:
+								pedirEstadoVuelo(estadosVuelos,&pasajeroActual->idEstadoVuelo);
+								printf("Se modifico el estado de vuelo de manera exitosa \n");
+							break;
+						}
+					}while(respuestaMenu != 7);
+					todoOk = 1;
+				}else
+					printf("Modificacion de pasajero canselada \n");
 			}else
-				printf("Modificacion de pasajero canselada \n");
-		}else
-			printf("ID no encontrada \n");
+				printf("ID no encontrada \n");
+    	}else
+    		printf("No hay pasajeros cargados \n");
     }else
     	printf("Error en los parametro de modificar pasajero \n");
 
@@ -213,20 +219,22 @@ int controller_removePassenger(LinkedList* pArrayListPassenger,LinkedList* tipos
     Passenger* pasajeroActual;
 
     if(pArrayListPassenger){
-    	id = pedirId();
-    	buscarPasajeroPorId(pArrayListPassenger,&indice,id);
-		if(indice != -1){
-			pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,indice);
-    		respuesta = pedirConfirmacion (*pasajeroActual,2,tiposPasajeros,estadosVuelos);
-			if(respuesta == 's'){
-				ll_remove(pArrayListPassenger,indice);
-				printf("Pasajero dado de baja de manera exitosa \n");
-				todoOk = 1;
+    	if(ll_len(pArrayListPassenger) >0 ){
+    		id = pedirId();
+			buscarPasajeroPorId(pArrayListPassenger,&indice,id);
+			if(indice != -1){
+				pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,indice);
+				respuesta = pedirConfirmacion (*pasajeroActual,BAJA,tiposPasajeros,estadosVuelos);
+				if(respuesta == 's'){
+					ll_remove(pArrayListPassenger,indice);
+					printf("Pasajero dado de baja de manera exitosa \n");
+					todoOk = 1;
+				}else
+					printf("Baja de pasajero canselada \n");
 			}else
-				printf("Baja de pasajero canselada \n");
-		}else
-			printf("ID no encontrada \n");
-
+				printf("ID no encontrada \n");
+    	}else
+    		printf("No hay pasajeros cargados \n");
     }else
     	printf("Error en los parametro de baja pasajero \n");
 
@@ -279,7 +287,52 @@ int controller_ListPassenger(LinkedList* pArrayListPassenger,LinkedList* tiposPa
  */
 int controller_sortPassenger(LinkedList* pArrayListPassenger)
 {
-    return 1;
+	int todoOk = 0;
+	int tipo;
+	int order;
+	if(pArrayListPassenger){
+		if(ll_len(pArrayListPassenger) > 0 ){
+			tipo = pedirMenuOrdenar();
+			if(tipo >=1 && tipo<=7){
+				order = pedirMenuOrdenarTipo();
+				if(order == 1 || order == 0){
+					printf("Ordenando la lista...\n");
+					switch(tipo){
+						case 1:
+							ll_sort(pArrayListPassenger,pasajeroComparaId,order);
+						break;
+						case 2:
+							ll_sort(pArrayListPassenger,pasajeroComparaNombre,order);
+						break;
+						case 3:
+							ll_sort(pArrayListPassenger,pasajeroComparaApellido,order);
+						break;
+						case 4:
+							ll_sort(pArrayListPassenger,pasajeroComparaPrecio,order);
+						break;
+						case 5:
+							ll_sort(pArrayListPassenger,pasajeroComparaTipoPasajero,order);
+						break;
+						case 6:
+							ll_sort(pArrayListPassenger,pasajeroComparaCodigoVuelo,order);
+						break;
+						case 7:
+							ll_sort(pArrayListPassenger,pasajeroComparaEstadoVuelo,order);
+						break;
+
+					}
+					todoOk=1;
+				}
+			}
+			if(todoOk)
+				printf("Se realizo el ordenamiento de forma correcta \n");
+			else
+				printf("Ordenamiento canselado \n");
+		}else
+			printf("No hay pasajeros cargados \n");
+	}else
+		printf("Error en los parametros de controller_sortPassenger \n");
+	return todoOk;
 }
 
 /** \brief Guarda los datos de los pasajeros en el archivo data.csv (modo texto).
@@ -299,29 +352,34 @@ int controller_saveAsText(char* path , LinkedList* pArrayListPassenger,LinkedLis
 	char descripcionTipo[20];
 	char descripcionEstado[20];
 	FILE* f = fopen(path,"r");
-	if(pArrayListPassenger && ll_len(pArrayListPassenger) > 0){
-		if(f != NULL){
-			printf("El archivo ya existe, desea sobrescribirlo ? s-n: ");
-			fflush(stdin);
-			scanf("%c",&confirmacion);
-			fflush(stdin);
-			confirmacion = tolower(confirmacion);
-		}
-		if(confirmacion == 's'){
-			FILE* f = fopen(path,"w");
-			fprintf(f,"id,name,lastname,price,flycode,typePassenger,statusFlight\n");
-			for(int i=0;i<ll_len(pArrayListPassenger);i++){
-				 pasajeroActual = ll_get(pArrayListPassenger,i);
-				 cargarDescripcionEstadoVuelo(estadosVuelos,pasajeroActual->idEstadoVuelo,descripcionEstado);
-				 cargarDescripcionTipoPasajero(tiposPasajeros,pasajeroActual->idTipoPasajero,descripcionTipo);
-				 fprintf(f,"%d,%s,%s,%f,%s,%s,%s\n",pasajeroActual->id,pasajeroActual->nombre,pasajeroActual->apellido,pasajeroActual->precio,
-						 pasajeroActual->codigoVuelo,descripcionTipo,descripcionEstado);
+	if(pArrayListPassenger){
+		if(ll_len(pArrayListPassenger) > 0){
+			if(f != NULL){
+				printf("El archivo ya existe, desea sobrescribirlo ? s-n: ");
+				fflush(stdin);
+				scanf("%c",&confirmacion);
+				fflush(stdin);
+				confirmacion = tolower(confirmacion);
 			}
-			todoOk = 1;
-			printf("Pasajeros guardados de manera exitosa en el archivo de texto %s \n",path);
-		}
+			if(confirmacion == 's'){
+				fclose(f);
+				FILE* f = fopen(path,"w");
+				fprintf(f,"id,name,lastname,price,flycode,typePassenger,statusFlight\n");
+				for(int i=0;i<ll_len(pArrayListPassenger);i++){
+					 pasajeroActual = ll_get(pArrayListPassenger,i);
+					 cargarDescripcionEstadoVuelo(estadosVuelos,pasajeroActual->idEstadoVuelo,descripcionEstado);
+					 cargarDescripcionTipoPasajero(tiposPasajeros,pasajeroActual->idTipoPasajero,descripcionTipo);
+					 fprintf(f,"%d,%s,%s,%f,%s,%s,%s\n",pasajeroActual->id,pasajeroActual->nombre,pasajeroActual->apellido,pasajeroActual->precio,
+							 pasajeroActual->codigoVuelo,descripcionTipo,descripcionEstado);
+				}
+				todoOk = 1;
+				printf("Pasajeros guardados de manera exitosa en el archivo de texto %s \n",path);
+			}else
+				printf("Se canselo el guardado en archivo texto \n");
+		}else
+			printf("No hay pasajeros cargados \n");
 	}else
-		printf("Error en los parametros de controller_saveAsText o lista vacia \n");
+		printf("Error en los parametros de controller_saveAsText \n");
 
 	fclose(f);
     return todoOk;
@@ -341,25 +399,30 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListPassenger)
 	Passenger* pasajeroActual;
 	FILE* f = fopen(path,"rb");
 
-	if(pArrayListPassenger && ll_len(pArrayListPassenger) > 0){
-		if(f != NULL){
-			printf("El archivo ya existe, desea sobrescribirlo ? s-n: ");
-			fflush(stdin);
-			scanf("%c",&confirmacion);
-			fflush(stdin);
-			confirmacion = tolower(confirmacion);
-		}
-		if(confirmacion == 's'){
-			f = fopen(path,"wb");
-			for(int i=0;i<ll_len(pArrayListPassenger);i++){
-				 pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,i);
-				 fwrite(pasajeroActual,sizeof(Passenger),1,f);
+	if(pArrayListPassenger){
+		if(ll_len(pArrayListPassenger) > 0){
+			if(f != NULL){
+				printf("El archivo ya existe, desea sobrescribirlo ? s-n: ");
+				fflush(stdin);
+				scanf("%c",&confirmacion);
+				fflush(stdin);
+				confirmacion = tolower(confirmacion);
 			}
-			todoOk = 1;
-			printf("Pasajeros guardados de manera exitosa en el archivo binario %s \n",path);
-		}
+			if(confirmacion == 's'){
+				fclose(f);
+				f = fopen(path,"wb");
+				for(int i=0;i<ll_len(pArrayListPassenger);i++){
+					 pasajeroActual = (Passenger*)ll_get(pArrayListPassenger,i);
+					 fwrite(pasajeroActual,sizeof(Passenger),1,f);
+				}
+				todoOk = 1;
+				printf("Pasajeros guardados de manera exitosa en el archivo binario %s \n",path);
+			}else
+				printf("Se canselo el guardado en archivo binario \n");
+		}else
+			printf("No hay pasajeros cargados \n");
 	}else
-		printf("Error en los parametros de controller_saveAsBinary o lista vacia \n");
+		printf("Error en los parametros de controller_saveAsBinary \n");
 	fclose(f);
     return todoOk;
 }

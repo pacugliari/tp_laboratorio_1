@@ -49,3 +49,12 @@ int Passenger_getCodigoVuelo(Passenger* this,char* codigoVuelo);
 int Passenger_getTipoPasajero(Passenger* this,int* tipoPasajero);
 int Passenger_getPrecio(Passenger* this,float* precio);
 int Passenger_getStatusFlight(Passenger* this,int* idEstadoVuelo);
+
+//Comparadores
+int pasajeroComparaId (void* a,void* b);
+int pasajeroComparaNombre (void* a,void* b);
+int pasajeroComparaApellido (void* a,void* b);
+int pasajeroComparaPrecio (void* a,void* b);
+int pasajeroComparaCodigoVuelo (void* a,void* b);
+int pasajeroComparaTipoPasajero (void* a,void* b);
+int pasajeroComparaEstadoVuelo (void* a,void* b);

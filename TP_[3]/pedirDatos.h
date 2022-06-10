@@ -28,4 +28,8 @@ void pedirPrecio (float* precio);
 void pedirApellido (char apellido[]);
 void pedirNombre(char nombre[]);
 int pedirMenuModificar();
+int pedirMenuOrdenar();
+int pedirMenuOrdenarTipo();
+int pedirPath(char* path);
+int pedirMenu();
 

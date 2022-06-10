@@ -157,6 +157,7 @@ int listarEstadosVuelos (LinkedList* lista){
 
     if(lista){
         system("cls");
+        printf("\n-------------------------------\n");
         printf("  ***LISTADO DE ESTADOS DE VUELOS***\n");
         printf("-------------------------------\n");
         printf("ID\tEstado de vuelo\n");
