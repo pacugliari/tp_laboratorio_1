@@ -1,19 +1,12 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <conio.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Passenger.h"
 #include "tipoPasajero.h"
 #include "estadoVuelo.h"
-#include <string.h>
 
-/** \brief Parsea los datos los datos de los pasajeros desde el archivo data.csv (modo texto).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
 
 int esCadenaValida(char* cadena){
 	int todoOk = 1;
@@ -22,8 +15,8 @@ int esCadenaValida(char* cadena){
 		strcpy(cadenaAux,cadena);
 		strlwr(cadenaAux);
 		for(int i=0;i<strlen(cadenaAux);i++){
-			if((cadenaAux[i] < 97 || cadenaAux[i] > 122) && cadenaAux[i] != ' '){
-				todoOk = 0;
+			if((cadenaAux[i] < 97 || cadenaAux[i] > 122) && cadenaAux[i] != ' ' && cadenaAux[i] != '-'){
+				todoOk=0;
 				break;
 			}
 		}
@@ -32,14 +25,12 @@ int esCadenaValida(char* cadena){
 	return todoOk;
 }
 
-int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* pId)
+int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* pId,LinkedList* tiposPasajeros,LinkedList* estadosVuelos)
 {
 	int datosLeidos,datosCargados=0;
 	char buffer [7][50];
     int indiceTipoPasajero;
     int indiceEstadoVuelo;
-    LinkedList* tiposPasajeros = TiposPasajeros_newLista();
-    LinkedList* estadosVuelos = EstadosVuelos_newLista();
     eEstadoVuelo* auxEstado;
     eTipoPasajero* auxTipo;
     Passenger* pasajeroNuevo = NULL;
@@ -58,7 +49,7 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* 
 
 			if(datosLeidos==7 && esCadenaValida(buffer[1]) && esCadenaValida(buffer[2]) && indiceEstadoVuelo != -1 && indiceTipoPasajero != -1){
 				auxEstado = (eEstadoVuelo*) ll_get(estadosVuelos,indiceEstadoVuelo);
-				auxTipo = (eTipoPasajero*) ll_get(tiposPasajeros,indiceEstadoVuelo);
+				auxTipo = (eTipoPasajero*) ll_get(tiposPasajeros,indiceTipoPasajero);
 
 				pasajeroNuevo = Passenger_newParametros(atoi(buffer[0]),buffer[1],buffer[2],atof(buffer[3]),buffer[4],auxTipo->id,auxEstado->id);
 				if(pasajeroNuevo){
@@ -78,19 +69,11 @@ int parser_PassengerFromText(FILE* pFile , LinkedList* pArrayListPassenger,int* 
     	printf("Formato de encabezado: id,name,lastname,price,flycode,typePassenger,statusFlight \n");
     }
 
-	TiposPasajeros_deleteLista(tiposPasajeros);
-	EstadosVuelos_deleteLista(estadosVuelos);
 	return datosCargados;
 }
 
 
-/** \brief Parsea los datos los datos de los pasajeros desde el archivo data.csv (modo binario).
- *
- * \param path char*
- * \param pArrayListPassenger LinkedList*
- * \return int
- *
- */
+
 int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger,int* pId)
 {
 	int datosLeidos,datosCargados=0;

@@ -5,11 +5,10 @@
  *      Author: PACugliari
  */
 
-
-#include "tipoPasajero.h"
 #include "stdlib.h"
 #include "stdio.h"
 #include <string.h>
+#include "tipoPasajero.h"
 
 eTipoPasajero* TipoPasajero_new(){
 	eTipoPasajero* nuevoTipo = (eTipoPasajero*) calloc(1,sizeof(eTipoPasajero));

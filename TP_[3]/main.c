@@ -1,14 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Passenger.h"
 #include "TipoPasajero.h"
 #include "EstadoVuelo.h"
-#include <string.h>
 #include "pedirDatos.h"
 
-void limpiarLista(LinkedList* listaPasajeros);
 
 int main()
 {
@@ -25,7 +24,7 @@ int main()
          switch(option=pedirMenu()){
              case 1:
             	 if(pedirPath(path))
-            		 controller_loadFromText(path,listaPasajeros,&id);
+            		 controller_loadFromText(path,listaPasajeros,&id,tiposPasajeros,estadosVuelos);
                  break;
              case 2:
             	 if(pedirPath(path))
@@ -80,27 +79,15 @@ int main()
          system("cls");
      }while (option != 10 );
 
-    limpiarLista(listaPasajeros);
-    ll_deleteLinkedList(listaPasajeros);
 	EstadosVuelos_deleteLista(estadosVuelos);
 	TiposPasajeros_deleteLista(tiposPasajeros);
+	Passenger_deleteLista(listaPasajeros);
+    ll_deleteLinkedList(listaPasajeros);
 
     return 0;
 }
 
 
-void limpiarLista (LinkedList* listaPasajeros){
-	int cursor = 0;
-	Passenger* pasajeroActual;
-	int tamanioLista = ll_len(listaPasajeros);
-	 while( tamanioLista > cursor){
-		 pasajeroActual = ll_get(listaPasajeros,cursor);
-		 Passenger_delete(pasajeroActual);
-		 cursor++;
-	 }
-	 ll_clear(listaPasajeros);
-	printf("Se limpiaron %d pasajeros de un total de %d cargados en la lista \n",cursor,tamanioLista);
-}
 
 
 

@@ -4,11 +4,11 @@
  *  Created on: 5 jun. 2022
  *      Author: PACugliari
  */
-
+#include <string.h>
 #include "estadoVuelo.h"
 #include "stdlib.h"
 #include "stdio.h"
-#include <string.h>
+
 
 
 eEstadoVuelo* EstadoVuelo_new(){
@@ -40,6 +40,9 @@ LinkedList* EstadosVuelos_newLista (){
 		if(estadoActual)
 			ll_add(todoOk,estadoActual);
 		estadoActual = EstadoVuelo_newParametros(20002,"Demorado");
+		if(estadoActual)
+			ll_add(todoOk,estadoActual);
+		estadoActual = EstadoVuelo_newParametros(20003,"En Vuelo");
 		if(estadoActual)
 			ll_add(todoOk,estadoActual);
 	}

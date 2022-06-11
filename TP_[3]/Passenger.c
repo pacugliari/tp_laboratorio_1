@@ -4,11 +4,11 @@
  *  Created on: 19 may. 2022
  *      Author: Maru
  */
-#include "Passenger.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
+#include "Passenger.h"
 #include "LinkedList.h"
 #include "tipoPasajero.h"
 #include "estadoVuelo.h"
@@ -49,6 +49,20 @@ Passenger* Passenger_newPassenger (Passenger pasajero){
 void Passenger_delete(Passenger* pasajero){
 	free(pasajero);
 }
+
+void Passenger_deleteLista (LinkedList* listaPasajeros){
+	int cursor = 0;
+	Passenger* pasajeroActual;
+	int tamanioLista = ll_len(listaPasajeros);
+	 while( tamanioLista > cursor){
+		 pasajeroActual = ll_get(listaPasajeros,cursor);
+		 Passenger_delete(pasajeroActual);
+		 cursor++;
+	 }
+	 ll_clear(listaPasajeros);
+	printf("Se limpiaron %d pasajeros de un total de %d cargados en la lista \n",cursor,tamanioLista);
+}
+
 
 int Passenger_setId(Passenger* this,int id){
     int todoOk = 0;
@@ -299,6 +313,38 @@ int pasajeroComparaEstadoVuelo (void* a,void* b){
         EstadosVuelos_deleteLista(estadosVuelos);
     }
     return retorno;
+}
+
+
+int buscarPasajeroPorId(LinkedList* pArrayListPassenger,int* pIndice,int id){
+	int todoOk = 0;
+	Passenger* pasajeroActual;
+	if(pArrayListPassenger && pIndice ){
+		(*pIndice) = -1;
+		for(int i=0;i<ll_len(pArrayListPassenger);i++){
+			pasajeroActual = ll_get(pArrayListPassenger,i);
+			if(pasajeroActual->id == id){
+				(*pIndice) = i;
+				break;
+			}
+		}
+		todoOk = 1;
+	}
+	return todoOk;
+}
+
+
+void printPassengerData (Passenger p,LinkedList* listaTiposPasajeros,LinkedList* listaEstadosVuelos){
+	char descripcionTipoPasajero [30];
+	char descripcionEstado [30];
+	if(listaTiposPasajeros && listaEstadosVuelos){
+		cargarDescripcionTipoPasajero(listaTiposPasajeros,p.idTipoPasajero,descripcionTipoPasajero);
+		cargarDescripcionEstadoVuelo(listaEstadosVuelos,p.idEstadoVuelo,descripcionEstado);
+		printf("%04d\t\t%-16s%-24s$%10.2f\t\t%-30s\t%-10s\t\t%-s\n",p.id,
+									p.nombre,p.apellido,p.precio,descripcionTipoPasajero,
+									p.codigoVuelo,descripcionEstado);
+	}else
+		printf("Error en los parametros de printPassengerData \n");
 }
 
 
