@@ -100,3 +100,18 @@ int pedirPath(char* path);
 /// @return retorna la opcion ingresada por el usuario
 int pedirMenu();
 
+/// @fn int esPrecioValido(char*)
+/// @brief valida si el precio ingresado por el usuario posee digitos validos, 0 a 9 y solo se permite un punto '.'
+///
+/// @param char *cadena, cadena donde se almacena el precio ingresado
+/// @return si el precio es valido retorna 1 sino 0
+int esPrecioValido (char *cadena);
+
+/// @fn int esValidoNombreOApellido(char*)
+/// @brief valida si el nombre o apellido ingresado por el usuario es valido, caracteres del a-z o A-Z
+///
+/// @param char* cadena,cadena que almacena el nombre/apellido
+/// @return si el nombre/apellido es valido retorna 1 sino 0
+int esValidoNombreOApellido (char* cadena);
+
+
