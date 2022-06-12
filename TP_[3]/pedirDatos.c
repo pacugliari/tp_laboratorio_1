@@ -71,12 +71,30 @@ char pedirConfirmacion (Passenger pasajero,int tipo,LinkedList* listaTiposPasaje
 
 }
 
+int esValidoNombreOApellido (char* cadena){
+	int todoOk = 1;
+
+	if(cadena){
+		char cadenaAux[strlen(cadena)+1];
+		strcpy(cadenaAux,cadena);
+		strlwr(cadenaAux);
+		for(int i=0;i<strlen(cadenaAux);i++){
+			if(cadenaAux [i] < 97 || cadenaAux [i] > 122){
+				printf("Solo se permite digitos a-z o A-Z para nombre/apellido \n");
+				todoOk = 0;
+				break;
+			}
+		}
+	}
+	return todoOk;
+}
+
 void pedirNombre(char nombre[]){
 	if(nombre){
 		printf("Ingrese el nombre del pasajero: ");
 		gets(nombre);
 		fflush(stdin);
-		while(strlen(nombre) >50  || strlen(nombre)<=1){
+		while((strlen(nombre) >50  || strlen(nombre)<=1) || !esValidoNombreOApellido(nombre)){
 			printf("Ingrese un nombre mas corto/largo: ");
 			gets(nombre);
 			fflush(stdin);
@@ -90,7 +108,7 @@ void pedirApellido (char apellido[]){
 		printf("Ingrese el apellido del pasajero: ");
 		gets(apellido);
 		fflush(stdin);
-		while(strlen(apellido) >50 || strlen(apellido)<=1){
+		while((strlen(apellido) >50 || strlen(apellido)<=1) || !esValidoNombreOApellido(apellido)){
 			printf("Ingrese un apellido mas corto/largo: ");
 			gets(apellido);
 			fflush(stdin);
@@ -99,15 +117,42 @@ void pedirApellido (char apellido[]){
 		printf("Error en parametro pedirApellido \n");
 }
 
+int esPrecioValido (char *cadena) {
+	int longitud = strlen(cadena);
+	int i;
+	int haEncontradoElPunto = 0;
+	int todoOk = 0;
+	if(cadena){
+		todoOk = 1;
+		for (i = 0; i < longitud; i++) {
+			if (cadena[i] == '.') {
+				if (haEncontradoElPunto) {
+					todoOk=  0;
+				} else {
+					haEncontradoElPunto = 1;
+				}
+			}
+			if (!isdigit(cadena[i]) && cadena[i] != '.')
+				todoOk=  0;
+		}
+			if(!todoOk){
+				printf("Solo se permite digitos 0-9 o '.' para el precio \n");
+			}
+	}
+	return todoOk;
+}
+
 void pedirPrecio (float* precio){
 	if(precio){
+		char precioAux[10];
 		printf("Ingrese el precio del vuelo $: ");
-		scanf("%f",precio);
+		gets(precioAux);
 		fflush(stdin);
-		while(*precio < 0 || *precio > 1000000){
-			printf("Error en precio, ingrese un precio positivo $: ");
-			scanf("%f",precio);
+		while((atof(precioAux) < 0 || atof (precioAux)> 1000000) || !esPrecioValido(precioAux)){
+			printf("Error en precio, ingrese un precio valido $: ");
+			gets(precioAux);
 		}
+		*precio = atof(precioAux);
 	}else
 		printf("Error en parametro pedirPrecio \n");
 }
