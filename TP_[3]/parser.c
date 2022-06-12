@@ -78,7 +78,7 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger,int
 {
 	int datosLeidos,datosCargados=0;
 	Passenger pasajeroLeido;
-	int mayorId;
+	int mayorId=0;
 	int esPrimero = 1;
 	Passenger* pasajeroNuevo;
 
@@ -100,8 +100,9 @@ int parser_PassengerFromBinary(FILE* pFile , LinkedList* pArrayListPassenger,int
 
 	if(datosCargados == 0){
     	printf("Error esta intentando abrir un archivo texto o error en el  archivo \n");
+    }else{
+    	(*pId) = mayorId +1;
     }
 
-	(*pId) = mayorId +1;
 	return datosCargados;
 }
