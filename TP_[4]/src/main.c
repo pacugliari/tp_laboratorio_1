@@ -78,8 +78,8 @@ int menu(){
 void ejecutarPruebas(){
      startTesting(1);  // ll_newLinkedList USADO
      startTesting(2);  // ll_len USADO
-     startTesting(3);  // getNode - test_getNode //NO SE PUEDEN USAR POR QUE SON PRIVADAS(STATIC)
-     startTesting(4);  // addNode - test_addNode //NO SE PUEDEN USAR POR QUE SON PRIVADAS(STATIC)
+     startTesting(3);  // getNode - test_getNode USADO
+     startTesting(4);  // addNode - test_addNode USADO
      startTesting(5);  // ll_add USADO
      startTesting(6);  // ll_get USADO
      startTesting(7);  // ll_set USADO

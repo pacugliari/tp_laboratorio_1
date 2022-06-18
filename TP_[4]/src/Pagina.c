@@ -7,13 +7,16 @@
 
 void ejecutarFunciones(){
     int pagina = 1;
-
-    pagina1(&pagina);
-    pagina2(&pagina);
-    pagina3(&pagina);
-
-    system("cls");
-    printf("FIN DE LA EJECUCION DE FUNCIONES \n");
+    LinkedList* listaArch = cargarArchivoEmpleados();//dentro se hace ll_newLinkedList
+    if(listaArch){
+        pagina1(&pagina,listaArch);
+        pagina2(&pagina,listaArch);
+        pagina3(&pagina,listaArch);
+        system("cls");
+        printf("FIN DE LA EJECUCION DE FUNCIONES \n");
+        destroy_ListaEmpleados(listaArch);
+        ll_deleteLinkedList(listaArch);//ll_deleteLinkedList
+    }
 
 }
 
@@ -23,10 +26,10 @@ int mostrarLista(LinkedList* lista){
     eEmpleado* empleado;
 
     if(lista){
-        tam = ll_len(lista);
+        tam = ll_len(lista);//ll_len
         for(int i=0;i<tam;i++){
             printf("Indice: %d\t",i);
-            empleado = ll_get(lista,i);
+            empleado = ll_get(lista,i);//ll_get
             mostrarEmpleado(empleado);
         }
         todoOk = 1;
@@ -38,14 +41,14 @@ int compararListas(LinkedList* original,LinkedList* clonada){
     int todoOk = 0;
     eEmpleado* empleado;
     if(original && clonada){
-        if(ll_containsAll(original,clonada)){
+        if(ll_containsAll(original,clonada)){//ll_containsAll
             printf("La lista clonada tiene todos los elementos de la sub-lista  \n");
         }else{
             printf("La lista clonada no tiene todos los elementos de la sub-lista  \n");
             printf("Busco los elementos que no esta en la lista clonada \n\n");
-            for(int i=0;i<ll_len(clonada);i++){
-                empleado = ll_get(clonada,i);
-                if(!ll_contains(original,empleado)){
+            for(int i=0;i<ll_len(clonada);i++){//ll_len
+                empleado = ll_get(clonada,i);//ll_get
+                if(!ll_contains(original,empleado)){//ll_contains
                     mostrarEmpleado(empleado);
                 }
             }
@@ -56,10 +59,11 @@ int compararListas(LinkedList* original,LinkedList* clonada){
 }
 
 
-void pagina1(int* pagina){
+void pagina1(int* pagina,LinkedList* lista){
      eEmpleado* empleado;
+     Node* nodo;
      int tamanio ;
-     LinkedList* listaArch = cargarArchivoEmpleados();
+     LinkedList* lista1 = ll_clone(lista);//ll_clone
 
     /*
     CARGO DE UN ARCHIVO DE PRUEBA DE EMPLEADOS EN UNA LISTA USANDO ADD, Y NEW, LUEGO RECORRO LA LISTA USANDO EMPTY,POP Y LIBERANDO LA MEMORIA
@@ -70,28 +74,42 @@ void pagina1(int* pagina){
     printf("PAGINA ACTUAL: %d \n",(*pagina));
     printf("-------------------------------------------------------------  \n");
     printf("Funciones usadas: \n");
+    printf("\t-test_addNode\n");
+    printf("\t-test_getNode\n");
+    printf("\t-ll_remove\n");
     printf("\t-ll_newLinkedList\n");
     printf("\t-ll_pop\n");
+    printf("\t-ll_clone\n");
     printf("\t-ll_add\n");
     printf("\t-ll_isEmpty\n");
     printf("\t-ll_len\n");
     printf("\t-ll_deleteLinkedList\n");
-
     printf("-------------------------------------------------------------  \n");
-    tamanio = ll_len(listaArch);
+    printf("OBTENGO UN NODO Y LO VUELVO AGREGAR USANDO GET/ADD NODE \n");
+    printf("-------------------------------------------------------------  \n");
+    nodo = (Node*) test_getNode(lista1,0);//test_getNode
+    empleado = nodo->pElement;
+    mostrarEmpleado(empleado);
+    ll_remove(lista1,0);//ll_remove
+    empleadoSetNombre(empleado,"test_getNode");
+    empleadoSetApellido(empleado,"test_addNode");
+    mostrarEmpleado(empleado);
+    nodo->pElement = empleado;
+    test_addNode(lista1,ll_len(lista1),empleado);//test_addNode
+    printf("-------------------------------------------------------------  \n");
+    tamanio = ll_len(lista1);//ll_len
     printf("Cantidad de empleados: %d \n",tamanio);
 
     mostrarEncabezadoEmpleado();
-    while(!ll_isEmpty(listaArch)){
-        empleado = ll_pop(listaArch,0);
+    while(!ll_isEmpty(lista1)){//ll_isEmpty
+        empleado = ll_pop(lista1,0);//ll_pop
         mostrarEmpleado(empleado);
-        destroy_Empleado(empleado);
     }
     printf("-------------------------------------------------------------  \n");
-    tamanio = ll_len(listaArch);
+    tamanio = ll_len(lista1);//ll_len
     printf("Como recorri la lista haciendo POP queda el tamanio en cero \n");
     printf("Cantidad de empleados: %d \n",tamanio);
-    ll_deleteLinkedList(listaArch);
+    ll_deleteLinkedList(lista1);//ll_deleteLinkedList
     printf("-------------------------------------------------------------  \n");
     printf("Presione alguna tecla para pasar a la siguiente pagina \n");
     system("pause");
@@ -102,10 +120,10 @@ void pagina1(int* pagina){
 
 
 
-void pagina2(int* pagina){
-    LinkedList* listaArch = cargarArchivoEmpleados();
-    LinkedList* lista3 = ll_subList(listaArch,10,20);
-    LinkedList* lista2 = ll_clone(lista3);
+void pagina2(int* pagina,LinkedList* lista){
+    LinkedList* lista1 = ll_clone(lista);//ll_clone
+    LinkedList* lista3 = ll_subList(lista1,10,20);//ll_subList
+    LinkedList* lista2 = ll_clone(lista3);//ll_clone
 
     printf("------------------------------------------------------------------------  \n");
     printf("PAGINA ACTUAL: %d \n",(*pagina));
@@ -123,7 +141,7 @@ void pagina2(int* pagina){
     printf("------------------------------------------------------------------------  \n");
     printf("LISTA ORIGINAL \n");
     printf("------------------------------------------------------------------------  \n");
-    mostrarLista(listaArch);
+    mostrarLista(lista1);
 
     printf("------------------------------------------------------------------------  \n");
     printf("LISTA3: CLONADA DE ORIGINAL DESDE INDICE 10 HASTA 20 \n");
@@ -147,10 +165,9 @@ void pagina2(int* pagina){
     system("pause");
     system("cls");
     (*pagina)++;
-    destroy_ListaEmpleados(listaArch);//COMO LISTA2 Y LISTA3 SON UNA COPIA DE LISTAARCH, LIBERANDO 1 SOLA VEZ ALCANZA
-    ll_deleteLinkedList(listaArch);
-    ll_deleteLinkedList(lista2);
-    ll_deleteLinkedList(lista3);
+    ll_deleteLinkedList(lista1);//ll_deleteLinkedList
+    ll_deleteLinkedList(lista2);//ll_deleteLinkedList
+    ll_deleteLinkedList(lista3);//ll_deleteLinkedList
     //-------------------------------------
 
 }
@@ -158,9 +175,9 @@ void pagina2(int* pagina){
 
 
 
-void pagina3(int* pagina){
-    LinkedList* listaArch = cargarArchivoEmpleados();
-    LinkedList* lista2 = ll_subList(listaArch,0,10);
+void pagina3(int* pagina,LinkedList* lista){
+    LinkedList* lista1 = ll_clone(lista);//ll_clone
+    LinkedList* lista2 = ll_subList(lista1,0,10);//ll_subList
     int indice1;
     int indice2;
     eEmpleado* empleado1;
@@ -187,10 +204,10 @@ void pagina3(int* pagina){
     printf("------------------------------------------------------------------------  \n");
     printf("MUESTRO EMPLEADO DEL INDICE 5 Y 6\n");
     printf("------------------------------------------------------------------------  \n");
-    empleado1 = ll_get(lista2,5);
-    empleado2 = ll_get(lista2,6);
-    indice1 =ll_indexOf(lista2,empleado1);
-    indice2 =ll_indexOf(lista2,empleado2);
+    empleado1 = ll_get(lista2,5);//ll_get
+    empleado2 = ll_get(lista2,6);//ll_get
+    indice1 =ll_indexOf(lista2,empleado1);//ll_indexOf
+    indice2 =ll_indexOf(lista2,empleado2);//ll_indexOf
     printf("Indice: %d\t",indice1);
     mostrarEmpleado(empleado1);
     printf("Indice: %d\t",indice2);
@@ -200,13 +217,13 @@ void pagina3(int* pagina){
     printf("------------------------------------------------------------------------  \n");
     empleadoSetNombre(empleado2,"'SETEADO'");
     empleadoSetApellido(empleado2,"'SETEADO'");
-    ll_set(lista2,indice2,empleado2);
+    ll_set(lista2,indice2,empleado2);//ll_set
     printf("Indice: %d\t",indice2);
     mostrarEmpleado(empleado2);
-    ll_remove(lista2,indice1);//NO PIERDO LA REFERENCIA YA QUE LO TENGO EN EMPLEADO1
+    ll_remove(lista2,indice1);//ll_remove
     empleadoSetNombre(empleado1,"'PUSHEADO'");
     empleadoSetApellido(empleado1,"'PUSHEADO'");
-    ll_push(lista2,ll_len(lista2),empleado1);
+    ll_push(lista2,ll_len(lista2),empleado1);//ll_push Y ll_len
     printf("------------------------------------------------------------------------  \n");
     printf("SUBLISTA CON SET+REMOVE+PUSH\n");
     printf("------------------------------------------------------------------------  \n");
@@ -215,20 +232,20 @@ void pagina3(int* pagina){
     printf("------------------------------------------------------------------------  \n");
     printf("CLONE DE SUBLISTA+ COMPARACION LISTA CLONADA\n");
     printf("------------------------------------------------------------------------  \n");
-    LinkedList* lista3 = ll_clone(lista2);
+    LinkedList* lista3 = ll_clone(lista2);//ll_clone
     compararListas(lista2,lista3);
 
     printf("------------------------------------------------------------------------  \n");
     printf("BORRO ELEMENTO DE SUBLISTA,BUSCO FALTANTES\n");
     printf("------------------------------------------------------------------------  \n");
-    ll_pop(lista2,0);
-    ll_pop(lista2,8);//NO PIERDO LA REFERENCIA YA QUE ESTAN EN LA LISTA2
+    ll_pop(lista2,0);//ll_pop
+    ll_pop(lista2,8);//ll_pop
     compararListas(lista2,lista3);
 
     printf("------------------------------------------------------------------------  \n");
     printf("CLEAR DE SUBLISTA: ");
-    ll_clear(lista2);
-    if(ll_isEmpty(lista2)){
+    ll_clear(lista2);//ll_clear
+    if(ll_isEmpty(lista2)){//ll_isEmpty
         printf("La lista se vacio \n");
     }else
         printf("La lista se encuentra con datos \n");
@@ -237,10 +254,9 @@ void pagina3(int* pagina){
     printf("Presione alguna tecla para pasar a la siguiente pagina \n");
     system("pause");
     system("cls");
-    destroy_ListaEmpleados(listaArch);
-    ll_deleteLinkedList(listaArch);
-    ll_deleteLinkedList(lista2);
-    ll_deleteLinkedList(lista3);
+    ll_deleteLinkedList(lista1);//ll_deleteLinkedList
+    ll_deleteLinkedList(lista2);//ll_deleteLinkedList
+    ll_deleteLinkedList(lista3);//ll_deleteLinkedList
     //-------------------------------------
 
 }

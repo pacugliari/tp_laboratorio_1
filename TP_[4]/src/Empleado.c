@@ -279,7 +279,8 @@ int destroy_ListaEmpleados(LinkedList* lista){
 LinkedList* cargarArchivoEmpleados(){
     LinkedList* retorno = NULL;
     char buffer[5][20];
-    FILE* arch = fopen("TP_[4]/src/empleados.csv","r");
+    char path[] = {"TP_[4]/src/empleados.csv"};
+    FILE* arch = fopen(path,"r");
     eEmpleado* empleado;
     int datos = 0;
 
@@ -295,6 +296,8 @@ LinkedList* cargarArchivoEmpleados(){
                 }
             }
         }
+    }else{
+    	printf("No se pudo iniciar el archivo de prueba '%s' \n",path);
     }
     fclose(arch);
     return retorno;
