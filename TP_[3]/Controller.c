@@ -31,7 +31,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListPassenger,int* pI
 				confirmacion = tolower(confirmacion);
 			}
 			if(confirmacion == 's'){
-				ll_clear(pArrayListPassenger);
+				Passenger_deleteLista(pArrayListPassenger);
 				contador = parser_PassengerFromText(arch,pArrayListPassenger,pId,tiposPasajeros,estadosVuelos);
 				printf("Cantidad de pasajeros cargados desde el archivo de texto: %s es: %d \n",path,contador);
 				todoOk=1;
@@ -65,7 +65,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListPassenger,int* 
 				confirmacion = tolower(confirmacion);
 			}
 			if(confirmacion == 's'){
-				ll_clear(pArrayListPassenger);
+				Passenger_deleteLista(pArrayListPassenger);
 				contador = parser_PassengerFromBinary(arch,pArrayListPassenger,pId);
 				printf("Cantidad de pasajeros cargados desde el archivo binario: %s es: %d \n",path,contador);
 				todoOk=1;

@@ -79,7 +79,7 @@ int esValidoNombreOApellido (char* cadena){
 		strcpy(cadenaAux,cadena);
 		strlwr(cadenaAux);
 		for(int i=0;i<strlen(cadenaAux);i++){
-			if(cadenaAux [i] < 97 || cadenaAux [i] > 122){
+			if((cadenaAux [i] < 97 || cadenaAux [i] > 122) && (cadenaAux[i] != ' ')){
 				printf("Solo se permite digitos a-z o A-Z para nombre/apellido \n");
 				todoOk = 0;
 				break;
@@ -95,7 +95,7 @@ void pedirNombre(char nombre[]){
 		gets(nombre);
 		fflush(stdin);
 		while((strlen(nombre) >50  || strlen(nombre)<=1) || !esValidoNombreOApellido(nombre)){
-			printf("Ingrese un nombre mas corto/largo: ");
+			printf("Error en nombre, ingrese un nombre valido: ");
 			gets(nombre);
 			fflush(stdin);
 		}
@@ -109,7 +109,7 @@ void pedirApellido (char apellido[]){
 		gets(apellido);
 		fflush(stdin);
 		while((strlen(apellido) >50 || strlen(apellido)<=1) || !esValidoNombreOApellido(apellido)){
-			printf("Ingrese un apellido mas corto/largo: ");
+			printf("Error en apellido, ingrese un apellido valido: ");
 			gets(apellido);
 			fflush(stdin);
 		}
@@ -122,7 +122,7 @@ int esPrecioValido (char *cadena) {
 	int i;
 	int haEncontradoElPunto = 0;
 	int todoOk = 0;
-	if(cadena){
+	if(cadena && longitud > 0){
 		todoOk = 1;
 		for (i = 0; i < longitud; i++) {
 			if (cadena[i] == '.') {
@@ -157,6 +157,25 @@ void pedirPrecio (float* precio){
 		printf("Error en parametro pedirPrecio \n");
 }
 
+int esCodigoVueloValido(char* cadena){
+
+	int todoOk = 0;
+	int tam = strlen(cadena);
+	if(cadena && tam>0){
+		todoOk=1;
+		char cadenaAux[tam+1];
+		strcpy(cadenaAux,cadena);
+		strlwr(cadenaAux);
+		for(int i=0;i<tam;i++){
+			if((cadenaAux[i] < '0' || cadenaAux[i] > '9') && (cadenaAux[i] < 'a' || cadenaAux[i] > 'z')){
+				todoOk = 0;
+				break;
+			}
+		}
+	}
+	return todoOk;
+}
+
 
 
 void pedirCodigoVuelo(char codigoVuelo[]){
@@ -164,8 +183,8 @@ void pedirCodigoVuelo(char codigoVuelo[]){
 		printf("Ingrese el codigo de vuelo del pasajero: ");
 		gets(codigoVuelo);
 		fflush(stdin);
-		while(strlen(codigoVuelo) >7 || strlen(codigoVuelo) <= 0){
-			printf("Ingrese un codigo de vuelo mas corto/largo, hasta 7 caracteres: ");
+		while(strlen(codigoVuelo) >7 || strlen(codigoVuelo) <= 0 || !esCodigoVueloValido(codigoVuelo)){
+			printf("Error en codigo de vuelo, ingrese un codigo de vuelo: ");
 			gets(codigoVuelo);
 			fflush(stdin);
 		}
